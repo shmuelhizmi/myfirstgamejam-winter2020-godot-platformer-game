@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="myfirstgamejam-winter2020"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
 
 [rendering]
 
