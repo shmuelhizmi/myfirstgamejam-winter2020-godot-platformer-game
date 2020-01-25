@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/player.cs" type="Script" id=1]
-[ext_resource path="res://assets/CS_FMArp B_110-C.ogg" type="AudioStream" id=2]
-[ext_resource path="res://assets/penguin.png" type="Texture" id=3]
+[ext_resource path="res://src/player.gd" type="Script" id=1]
+[ext_resource path="res://assets/penguin.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30.9976, 39 )
@@ -10,7 +9,6 @@ extents = Vector2( 30.9976, 39 )
 [node name="player" type="Node2D"]
 position = Vector2( -2, -136 )
 script = ExtResource( 1 )
-jumpAudioStream = ExtResource( 2 )
 
 [node name="body" type="KinematicBody2D" parent="."]
 
@@ -19,7 +17,7 @@ shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="body"]
 scale = Vector2( 0.0447019, 0.0487869 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="animationPlayer" type="AnimationPlayer" parent="body/sprite"]
 
