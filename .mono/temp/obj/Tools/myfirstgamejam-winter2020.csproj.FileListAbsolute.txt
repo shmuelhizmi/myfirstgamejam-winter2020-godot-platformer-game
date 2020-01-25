@@ -1,0 +1,5 @@
+/home/shmuelhizmi/Documents/projects/myfirstgamejam-winter2020-godot-platformer-game/.mono/temp/bin/Tools/myfirstgamejam-winter2020.dll
+/home/shmuelhizmi/Documents/projects/myfirstgamejam-winter2020-godot-platformer-game/.mono/temp/bin/Tools/myfirstgamejam-winter2020.pdb
+/home/shmuelhizmi/Documents/projects/myfirstgamejam-winter2020-godot-platformer-game/.mono/temp/obj/Tools/myfirstgamejam-winter2020.csprojAssemblyReference.cache
+/home/shmuelhizmi/Documents/projects/myfirstgamejam-winter2020-godot-platformer-game/.mono/temp/obj/Tools/myfirstgamejam-winter2020.dll
+/home/shmuelhizmi/Documents/projects/myfirstgamejam-winter2020-godot-platformer-game/.mono/temp/obj/Tools/myfirstgamejam-winter2020.pdb
