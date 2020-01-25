@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 394, 10 )
 
-[node name="Node2D" type="Node2D"]
+[node name="world" type="Node2D"]
 
 [node name="map" type="Node2D" parent="."]
 
@@ -25,7 +25,43 @@ margin_right = 391.0
 margin_bottom = 33.0
 text = "TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP "
 
+[node name="mapstaticbody2" type="StaticBody2D" parent="map"]
+position = Vector2( -372.299, -125.208 )
+rotation = 0.00455348
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="collision" type="CollisionShape2D" parent="map/mapstaticbody2"]
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="map/mapstaticbody2"]
+margin_left = -389.0
+margin_top = -6.0
+margin_right = 391.0
+margin_bottom = 33.0
+text = "TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP "
+
+[node name="mapstaticbody3" type="StaticBody2D" parent="map"]
+position = Vector2( 577.285, -64.2659 )
+rotation = 0.00455348
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="collision" type="CollisionShape2D" parent="map/mapstaticbody3"]
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="map/mapstaticbody3"]
+margin_left = -389.0
+margin_top = -6.0
+margin_right = 391.0
+margin_bottom = 33.0
+text = "TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP TEST MAP "
+
 [node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 79.9945, -145.972 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1, 0 )
 current = true
