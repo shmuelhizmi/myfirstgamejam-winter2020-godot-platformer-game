@@ -65,10 +65,9 @@ func _process(delta):
 	velocity.y += gravityScale * delta;
 	velocity+= slide()* delta;
 	velocity = body.move_and_slide(velocity, up);
-	var collision = body.move_and_collide(Vector2());
-	if collision!= null:
-		onCollide(collision);
-		pass
+	for i in body.get_slide_count():
+    	var collision = body.get_slide_collision(i)
+    	onCollide(collision.collider)
 	pass
 
 func slide():
@@ -116,13 +115,13 @@ func actionMove(directin, isRunning):
 	pass
 	
 func onCollide(collider):
-	if "enemy" in collider.collider.name:
+	if "enemy" in collider.name:
 		damage();
 		pass
-	if "checkpoint" in collider.collider.name:
-		lastCheckpoint = collider.collider.position;
+	if "checkpoint" in collider.name:
+		lastCheckpoint = collider.position;
 		print(lastCheckpoint);
-		collider.collider.queue_free();
+		collider.queue_free();
 		pass
 	pass
 	

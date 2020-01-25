@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30.9976, 39 )
+extents = Vector2( 7, 6 )
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,6 +17,7 @@ current = true
 [node name="body" type="KinematicBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
+scale = Vector2( 4.5, 6 )
 shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="body"]
