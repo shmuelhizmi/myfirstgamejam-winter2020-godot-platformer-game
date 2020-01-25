@@ -1,6 +1,6 @@
-
 extends Node
 
+#player nodes
 var body;
 var raycast1;
 var raycast2;
@@ -10,14 +10,20 @@ var animationPlayer;
 #ui
 var lifelable;
 
-export var lifes = 3;
 
+	#player properties
+#logic properties
+export var lifes = 3;
+export var maximum_lifes = 3;
+var lastCheckpoint;
+# movement properties
 export var speed = 280;
 export var runningMultiplier = 1.3;
 export var jumpForce = 450;
 export var gravityScale = 1200;
 export var slideness = 10;
 
+#player animations
 export var idleAnimationName="";
 export var walkAnimationName="";
 export var slideAnimationName="";
@@ -42,12 +48,13 @@ func _ready():
 	animationPlayer = get_node("body/sprite/animationPlayer");
 	
 	lifelable = get_node("hud/container/Top/life");
-	lifelable.text = str(lifes);
 	
 	jumpAudioStream = load("res://assets/CS_FMArp B_110-C.ogg");
 	slideAudioStream = load("res://assets/CS_FMArp B_110-C.ogg");
 	walkAudioStream = load("res://assets/CS_FMArp B_110-C.ogg");
 	
+	drawLifes();
+	lastCheckpoint = body.position;
 	
 	pass # Replace with function body.
 
@@ -108,11 +115,32 @@ func actionMove(directin, isRunning):
 	
 func onCollide(collider):
 	if "enemy" in collider.collider.name:
-		lifes=lifes-1;
-		lifesChanged()
+		damage()
 		pass;
+	if "checkpoint" in collider.collider.name:
+		lastCheckpoint = collider.collider.position;
+		pass
 	pass
 	
-func lifesChanged():
-	lifelable.text=str(lifes);
+func damage():
+	lifes=lifes-1;
+	drawLifes();
+	if lifes<=0:
+		get_tree().reload_current_scene();
+		pass
+	else:
+		body.position = lastCheckpoint;
+		pass	
 	pass
+func drawLifes():
+	var lifecount = 0;
+	lifelable.text="";
+	while lifecount < maximum_lifes:
+		lifecount+=1;
+		if lifecount>lifes:
+			lifelable.text+="x";
+			pass
+		else:
+			lifelable.text+="♥";
+			pass
+		pass
