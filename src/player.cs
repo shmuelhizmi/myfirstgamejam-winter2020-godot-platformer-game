@@ -1,12 +1,21 @@
 using Godot;
 using System;
 
+enum MovementAction { idle, walk, run, jump, slide }
+
+struct Directin
+{
+    public const int right = 1;
+    public const int left = -1;
+}
+
 public class player : Node2D
 {
     //nodes
     KinematicBody2D body;
     RayCast2D rayCast1;
     RayCast2D rayCast2;
+    AudioStreamPlayer2D audioStreamPlayer;
     AnimationPlayer animationPlayer;
 
     //movement properties
@@ -17,9 +26,13 @@ public class player : Node2D
     [Export] int slideness = 10;
     [Export] public string idleAnimationName;
     [Export] public string walkAnimationName;
+    [Export] public string slideAnimationName;
     [Export] public string runAnimationName;
     [Export] public string jumpAnimationName;
     [Export] public string crouchAnimationName;
+    [Export] public AudioStream jumpAudioStream;
+    [Export] public AudioStream slideAudioStream;
+    [Export] public AudioStream walkAudioStream;
 
     //extends functions
     [Signal] public delegate void _AfterProcess(float delta);
@@ -34,10 +47,13 @@ public class player : Node2D
     //movement variables
     Vector2 velocity = new Vector2();
     Vector2 up = new Vector2(0, -1); // for collision testing
+    MovementAction currentAction = MovementAction.idle;
+
     public override void _Ready()
     {
         //get nodes
         body = GetNode<KinematicBody2D>("body");
+        audioStreamPlayer = GetNode<AudioStreamPlayer2D>("audioStreamPlayer");
         animationPlayer = body.GetNode<AnimationPlayer>("sprite/animationPlayer");
         rayCast1 = body.GetNode<RayCast2D>("rayCast1");
         rayCast2 = body.GetNode<RayCast2D>("rayCast2");
@@ -54,17 +70,18 @@ public class player : Node2D
 
         velocity.y += gravityScale * delta; //apply grvity 
         velocity += slide() * delta;
-
-        if (velocity.x == 0)// is player is idle
+        if (velocity.x == 0 && body.IsOnFloor() && currentAction != MovementAction.slide)// is player is idle
         {
-            setAnimation(idleAnimationName);
+            currentAction = MovementAction.idle;
         }
+
         velocity = body.MoveAndSlide(velocity, up);
         KinematicCollision2D collision = body.MoveAndCollide(new Vector2());
         if (collision != null)
         {
             EmitSignal("_onCollision", collision);
         }
+        updateVisuals();
         EmitSignal("_AfterProcess", delta);
     }
 
@@ -76,7 +93,7 @@ public class player : Node2D
         }
         move();
     }
-
+    //movement
     public Vector2 slide()
     {
         Node2D ground1 = (Node2D)rayCast1.GetCollider();
@@ -120,6 +137,8 @@ public class player : Node2D
         {
             actionJump();
         }
+
+
         if (right)
         {
             actionMove(Directin.right, run);
@@ -129,15 +148,13 @@ public class player : Node2D
         {
             actionMove(Directin.left, run);
         }
+
         return;
 
     }
     void actionJump()
     {
-        if (jumpAnimationName != null)
-        {
-            animationPlayer.Play(jumpAnimationName);
-        }
+        currentAction = MovementAction.jump;
         velocity.y = -jumpForce;
         EmitSignal("_AfterJump", jumpForce);
     }
@@ -145,16 +162,52 @@ public class player : Node2D
     {
         if (isRunning)
         {
+            if (body.IsOnFloor())
+            {
+                currentAction = MovementAction.run;
+            }
             velocity.x += speed * directin * runningMultiplier;
             setAnimation(runAnimationName);
         }
         else
         {
+            if (body.IsOnFloor())
+            {
+                currentAction = MovementAction.walk;
+            }
             setAnimation(walkAnimationName);
             velocity.x += speed * directin;
         }
 
         EmitSignal("_AfterMove", speed * directin);
+    }
+
+    //visuals
+    void updateVisuals()
+    {
+        switch (currentAction)
+        {
+            case MovementAction.idle:
+                setAnimation(idleAnimationName);
+                audioStreamPlayer.Stop();
+                break;
+            case MovementAction.walk:
+                setAnimation(walkAnimationName);
+                setAudio(walkAudioStream);
+                break;
+            case MovementAction.run:
+                setAnimation(runAnimationName);
+                setAudio(walkAudioStream);
+
+                break;
+            case MovementAction.slide:
+                setAudio(slideAudioStream);
+                break;
+            case MovementAction.jump:
+                setAnimation(jumpAnimationName);
+                setAudio(jumpAudioStream);
+                break;
+        }
     }
     public void setAnimation(string animation)
     {
@@ -163,9 +216,13 @@ public class player : Node2D
             animationPlayer.SetCurrentAnimation(animation);
         }
     }
-    struct Directin
+    public void setAudio(AudioStream audio)
     {
-        public const int right = 1;
-        public const int left = -1;
+        if (audio != null && (audioStreamPlayer.Stream != audio || !audioStreamPlayer.IsPlaying()))
+        {
+            GD.Print(currentAction);
+            audioStreamPlayer.Stream = audio;
+            audioStreamPlayer.Play();
+        }
     }
 }
