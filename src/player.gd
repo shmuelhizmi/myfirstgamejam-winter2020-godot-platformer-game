@@ -7,11 +7,16 @@ var raycast2;
 var audioStreamPlayer;
 var animationPlayer;
 
+#ui
+var lifelable;
+
+export var lifes = 3;
+
 export var speed = 280;
 export var runningMultiplier = 1.3;
 export var jumpForce = 450;
 export var gravityScale = 1200;
-export var slideness = 0.2;
+export var slideness = 10;
 
 export var idleAnimationName="";
 export var walkAnimationName="";
@@ -34,7 +39,10 @@ func _ready():
 	raycast1 = body.get_node("rayCast1");
 	raycast2 = body.get_node("rayCast2");
 	audioStreamPlayer = get_node("audioStreamPlayer");
-	animationPlayer = get_node("sprite/animationPlayer");
+	animationPlayer = get_node("body/sprite/animationPlayer");
+	
+	lifelable = get_node("hud/container/Top/life");
+	lifelable.text = str(lifes);
 	
 	jumpAudioStream = load("res://assets/CS_FMArp B_110-C.ogg");
 	slideAudioStream = load("res://assets/CS_FMArp B_110-C.ogg");
@@ -46,9 +54,12 @@ func _ready():
 func _process(delta):
 	handleInput()
 	velocity.y += gravityScale * delta;
-	velocity+= slide();
+	velocity+= slide()* delta;
 	velocity = body.move_and_slide(velocity, up);
-	
+	var collision = body.move_and_collide(Vector2());
+	if collision!= null:
+		onCollide(collision);
+		pass
 	pass
 
 func slide():
@@ -65,11 +76,12 @@ func slide():
 		divideBy+=1;
 		pass
 	if rotationDegrees==0 :
+		body.rotation_degrees = 0;
 		return Vector2()
 
 	rotationDegrees = rotationDegrees / divideBy;
 	body.rotation_degrees = rotationDegrees;
-	return (Vector2(1,1)* ( rad2deg(rotationDegrees)* slideness ))
+	return Vector2(1,0.5)* ( rad2deg(rotationDegrees)* slideness )
 
 func handleInput():
 	velocity.x = 0;
@@ -92,4 +104,15 @@ func actionMove(directin, isRunning):
 		pass
 	else:
 		velocity.x += speed * directin;
+	pass
+	
+func onCollide(collider):
+	if "enemy" in collider.collider.name:
+		lifes=lifes-1;
+		lifesChanged()
+		pass;
+	pass
+	
+func lifesChanged():
+	lifelable.text=str(lifes);
 	pass
