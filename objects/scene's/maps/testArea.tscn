@@ -1,14 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/pixil-frame-0.png" type="Texture" id=1]
 [ext_resource path="res://objects/scene's/enemy/enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/scene's/player/player.tscn" type="PackedScene" id=3]
 
+[sub_resource type="CircleShape2D" id=1]
+
 [node name="world" type="Node2D"]
 
 [node name="map" type="Node2D" parent="."]
 
+[node name="ColorRect" type="ColorRect" parent="map"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -510.99
+margin_top = 102.424
+margin_right = 509.01
+margin_bottom = 302.424
+color = Color( 0.207843, 0.466667, 0.717647, 0.698039 )
+
 [node name="mapstaticbody" type="StaticBody2D" parent="map"]
+editor/display_folded = true
+position = Vector2( -81.3967, 100.992 )
 
 [node name="pixil-frame-0" type="Sprite" parent="map/mapstaticbody"]
 position = Vector2( 107.853, -23.339 )
@@ -19,23 +33,27 @@ texture = ExtResource( 1 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map/mapstaticbody"]
 polygon = PoolVector2Array( 12.0057, -13.685, 38.3781, -15.9964, 39.6454, -5.04308, 87.9245, -9.88915, 90.3988, -1.29549, 121.153, -4.11385, 122.166, 4.6488, 132.474, 4.19618, 133.657, 14.4193, 152.727, 12.9528, 154.471, 21.6309, 174.187, 19.3497, 173.572, 26.8209, 194.271, 26.6458, 200.463, 67.3692, 191.785, 69.1133, 193.873, 99.9515, 184.296, 100.32, 185.563, 111.273, 146.047, 115.105, 145.769, 125.497, 96.7598, 130.428, 96.9589, 138.545, -115.451, 163.861, -115.819, 154.284, -151.515, 159.154, -159.523, 147.501, -165.365, 148.177, -170.851, 119.952, -183.434, 119.928, -185.636, 81.7027, -195.298, 81.3406, -199.215, 41.094, -191.098, 40.8948, -189.36, 30.3338, -162.257, 27.9379, -161.165, 18.1916, -141.618, 14.4499, -141.902, 5.60277 )
 
-[node name="enemy2" type="StaticBody2D" parent="map"]
-position = Vector2( 439.617, -187.589 )
+[node name="checkpoint" type="StaticBody2D" parent="map"]
+editor/display_folded = true
+position = Vector2( 291.887, -51.0167 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="pixil-frame-0" type="Sprite" parent="map/enemy2"]
-position = Vector2( 107.853, -23.339 )
-rotation = -0.115192
-scale = Vector2( 10.0558, 10.0279 )
-texture = ExtResource( 1 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/checkpoint"]
+scale = Vector2( 5, 5 )
+shape = SubResource( 1 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map/enemy2"]
-polygon = PoolVector2Array( 12.0057, -13.685, 38.3781, -15.9964, 39.6454, -5.04308, 87.9245, -9.88915, 90.3988, -1.29549, 121.153, -4.11385, 122.166, 4.6488, 132.474, 4.19618, 133.657, 14.4193, 152.727, 12.9528, 154.471, 21.6309, 174.187, 19.3497, 173.572, 26.8209, 194.271, 26.6458, 200.463, 67.3692, 191.785, 69.1133, 193.873, 99.9515, 184.296, 100.32, 185.563, 111.273, 146.047, 115.105, 145.769, 125.497, 96.7598, 130.428, 96.9589, 138.545, -115.451, 163.861, -115.819, 154.284, -151.515, 159.154, -159.523, 147.501, -165.365, 148.177, -170.851, 119.952, -183.434, 119.928, -185.636, 81.7027, -195.298, 81.3406, -199.215, 41.094, -191.098, 40.8948, -189.36, 30.3338, -162.257, 27.9379, -161.165, 18.1916, -141.618, 14.4499, -141.902, 5.60277 )
+[node name="Label" type="Label" parent="map/checkpoint"]
+margin_left = -34.6638
+margin_top = -6.30252
+margin_right = 35.3362
+margin_bottom = 7.69748
+text = "checkpoint"
 
 [node name="mapstaticbody2" type="StaticBody2D" parent="map"]
-position = Vector2( -400, -100 )
+editor/display_folded = true
+position = Vector2( -481.397, 0.992065 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -49,8 +67,23 @@ texture = ExtResource( 1 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map/mapstaticbody2"]
 polygon = PoolVector2Array( 12.0057, -13.685, 38.3781, -15.9964, 39.6454, -5.04308, 87.9245, -9.88915, 90.3988, -1.29549, 121.153, -4.11385, 122.166, 4.6488, 132.474, 4.19618, 133.657, 14.4193, 152.727, 12.9528, 154.471, 21.6309, 174.187, 19.3497, 173.572, 26.8209, 194.271, 26.6458, 200.463, 67.3692, 191.785, 69.1133, 193.873, 99.9515, 184.296, 100.32, 185.563, 111.273, 146.047, 115.105, 145.769, 125.497, 96.7598, 130.428, 96.9589, 138.545, -115.451, 163.861, -115.819, 154.284, -151.515, 159.154, -159.523, 147.501, -165.365, 148.177, -170.851, 119.952, -183.434, 119.928, -185.636, 81.7027, -195.298, 81.3406, -199.215, 41.094, -191.098, 40.8948, -189.36, 30.3338, -162.257, 27.9379, -161.165, 18.1916, -141.618, 14.4499, -141.902, 5.60277 )
 
+[node name="mapstaticbody3" type="StaticBody2D" parent="map/mapstaticbody2"]
+editor/display_folded = true
+position = Vector2( 828.399, 19.8093 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="pixil-frame-0" type="Sprite" parent="map/mapstaticbody2/mapstaticbody3"]
+position = Vector2( 107.853, -23.339 )
+rotation = -0.115192
+scale = Vector2( 10.0558, 10.0279 )
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map/mapstaticbody2/mapstaticbody3"]
+polygon = PoolVector2Array( 12.0057, -13.685, 38.3781, -15.9964, 39.6454, -5.04308, 87.9245, -9.88915, 90.3988, -1.29549, 121.153, -4.11385, 122.166, 4.6488, 132.474, 4.19618, 133.657, 14.4193, 152.727, 12.9528, 154.471, 21.6309, 174.187, 19.3497, 173.572, 26.8209, 194.271, 26.6458, 200.463, 67.3692, 191.785, 69.1133, 193.873, 99.9515, 184.296, 100.32, 185.563, 111.273, 146.047, 115.105, 145.769, 125.497, 96.7598, 130.428, 96.9589, 138.545, -115.451, 163.861, -115.819, 154.284, -151.515, 159.154, -159.523, 147.501, -165.365, 148.177, -170.851, 119.952, -183.434, 119.928, -185.636, 81.7027, -195.298, 81.3406, -199.215, 41.094, -191.098, 40.8948, -189.36, 30.3338, -162.257, 27.9379, -161.165, 18.1916, -141.618, 14.4499, -141.902, 5.60277 )
+
 [node name="enemy" parent="map" instance=ExtResource( 2 )]
 position = Vector2( -464.192, -168.113 )
 
 [node name="player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 79.9945, -145.972 )

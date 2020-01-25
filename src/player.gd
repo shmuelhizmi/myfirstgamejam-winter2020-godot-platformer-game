@@ -39,6 +39,8 @@ var velocity = Vector2();
 var up = Vector2(0, -1);
 var currentAction = "idle";
 
+enum Direction {L=-1, R=1}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	body = get_node("body");
@@ -98,10 +100,10 @@ func handleInput():
 			pass
 		pass
 	if Input.is_action_pressed("player_right"):
-		actionMove(1,Input.is_action_pressed("player_run"));
+		actionMove(Direction.R,Input.is_action_pressed("player_run"));
 		pass
 	if Input.is_action_pressed("player_left"):
-		actionMove(-1,Input.is_action_pressed("player_run"));
+		actionMove(Direction.L,Input.is_action_pressed("player_run"));
 		pass
 	pass
 	
@@ -115,10 +117,12 @@ func actionMove(directin, isRunning):
 	
 func onCollide(collider):
 	if "enemy" in collider.collider.name:
-		damage()
-		pass;
+		damage();
+		pass
 	if "checkpoint" in collider.collider.name:
 		lastCheckpoint = collider.collider.position;
+		print(lastCheckpoint);
+		collider.collider.queue_free();
 		pass
 	pass
 	

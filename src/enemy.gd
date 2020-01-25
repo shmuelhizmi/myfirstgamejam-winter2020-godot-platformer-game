@@ -34,11 +34,11 @@ func slide():
 	var ground2 = raycast2.get_collider()
 	var rotationDegrees = 0.0
 	var divideBy = 0
-	if ground1!=null and not "player" in ground1.name :
+	if ground1 != null and not "player" in ground1.name :
 		rotationDegrees += ground1.rotation_degrees
 		divideBy+=1;
 		pass
-	if ground1!=null and not "player" in ground1.name :
+	if ground1 != null and not "player" in ground1.name :
 		rotationDegrees += ground1.rotation_degrees
 		divideBy+=1
 		pass
