@@ -39,7 +39,6 @@ position = Vector2( 30, 0 )
 enabled = true
 
 [node name="CollisionDetector" type="Area2D" parent="body"]
-editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body/CollisionDetector"]
 shape = SubResource( 2 )
