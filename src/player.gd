@@ -2,6 +2,7 @@ extends Node
 
 #player nodes
 var body;
+var camera;
 var raycast1;
 var raycast2;
 var audioStreamPlayer;
@@ -44,6 +45,7 @@ enum Direction {L=-1, R=1}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	body = get_node("player_body");
+	camera = get_node("camera");
 	raycast1 = body.get_node("rayCast1");
 	raycast2 = body.get_node("rayCast2");
 	audioStreamPlayer = get_node("audioStreamPlayer");
@@ -117,6 +119,10 @@ func _on_CollisionDetector_body_entered(collider):
 		pass
 	if "checkpoint" in collider.name:
 		lastCheckpoint = collider.position;
+		collider.queue_free();
+		pass
+	if "camerapoint" in collider.name:
+		camera.position.x = collider.position.x;
 		collider.queue_free();
 		pass
 	if "collectable" in collider.name:
