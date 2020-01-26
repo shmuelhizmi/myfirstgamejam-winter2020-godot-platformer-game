@@ -114,7 +114,7 @@ func actionMove(directin, isRunning):
 	pass
 	
 func _on_CollisionDetector_body_entered(collider):
-	if "enemy" in collider.name:
+	if collider.is_in_group("enemy"):
 		damage();
 		pass
 	if "checkpoint" in collider.name:

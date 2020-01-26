@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/enemy.gd" type="Script" id=1]
+[ext_resource path="res://src/redPenguin.gd" type="Script" id=1]
 [ext_resource path="res://assets/penguin.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 30.8556
 height = 14.7685
 
-[node name="enemy" type="KinematicBody2D" groups=[
+[node name="redPenguin" type="KinematicBody2D" groups=[
 "enemy",
 ]]
 position = Vector2( -156.398, 20.674 )
