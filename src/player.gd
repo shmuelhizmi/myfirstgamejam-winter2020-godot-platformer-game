@@ -1,14 +1,14 @@
 extends Node
 
 #player nodes
-var body;
-var sprite;
-var camera;
-var audioStreamPlayer;
-var animationPlayer;
+onready var body: KinematicBody2D = get_node("player_body");
+onready var sprite :Sprite= get_node("player_body/sprite");
+onready var camera :Camera2D = get_node("camera");
+onready var audioStreamPlayer :AudioStreamPlayer2D = get_node("audioStreamPlayer");
+onready var animationPlayer :AnimationPlayer = sprite.get_node("animationPlayer");
 
 #ui
-var lifelable;
+onready var lifelable :Label = get_node("hud/container/Top/life");
 
 
 	#player properties
@@ -43,18 +43,6 @@ enum Direction {L=-1, R=1}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	body = get_node("player_body");
-	sprite = get_node("player_body/sprite");
-	camera = get_node("camera");
-	audioStreamPlayer = get_node("audioStreamPlayer");
-	animationPlayer = sprite.get_node("animationPlayer");
-	
-	lifelable = get_node("hud/container/Top/life");
-	
-	jumpAudioStream = load("res://assets/CS_FMArp B_110-C.ogg");
-	slideAudioStream = load("res://assets/CS_FMArp B_110-C.ogg");
-	walkAudioStream = load("res://assets/CS_FMArp B_110-C.ogg");
-	
 	drawLifes();
 	lastCheckpoint = body.position;
 	
@@ -168,7 +156,7 @@ func drawLifes():
 			lifelable.text+="x";
 			pass
 		else:
-			lifelable.text+="♥";
+			lifelable.text+="♥ ";
 			pass
 		pass
 		
