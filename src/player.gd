@@ -23,6 +23,8 @@ export var jumpForce = 450;
 export var gravityScale = 1200;
 export var slideness = 100;
 
+export var cameraSpeed = 2220 ;
+
 #player animations
 export var idleAnimationName="";
 export var walkAnimationName="";
@@ -37,6 +39,7 @@ var walkAudioStream;
 
 var velocity = Vector2();
 var up = Vector2(0, -1);
+onready var cureentCameraTarget	 = camera.position.x;
 var currentAction = "idle";
 
 enum Direction {L=-1, R=1}
@@ -53,6 +56,7 @@ func _process(delta):
 	velocity.y += gravityScale * delta;
 	velocity+=slide()
 	velocity = body.move_and_slide(velocity, up);
+	update_camera(delta);
 	pass
 
 func slide():
@@ -82,7 +86,13 @@ func handleInput():
 		actionMove(Direction.L,Input.is_action_pressed("player_run"));
 		pass
 	pass
-	
+
+
+func update_camera(delta):
+	if cureentCameraTarget > camera.position.x:
+		camera.position+=Vector2(delta*cameraSpeed,0)
+	pass
+
 func actionMove(directin, isRunning):
 	if isRunning :
 		velocity.x += speed * directin * runningMultiplier;
@@ -106,7 +116,7 @@ func _on_CollisionDetector_area_entered(area):
 		area.queue_free();
 		pass
 	if "camerapoint" in area.name:
-		camera.position.x = area.position.x;
+		cureentCameraTarget = area.position.x;
 		pass
 	if "collectable" in area.name:
 		onCollideCollectable(area.name);
@@ -160,7 +170,7 @@ func drawLifes():
 			pass
 		pass
 		
-		
+	pass
 #abilities
 
 func start_ability_speed():
@@ -170,3 +180,4 @@ func start_ability_speed():
 func end_ability_speed():
 	speed+=-90;
 	pass
+	
