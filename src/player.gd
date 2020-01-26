@@ -2,9 +2,8 @@ extends Node
 
 #player nodes
 var body;
+var sprite;
 var camera;
-var raycast1;
-var raycast2;
 var audioStreamPlayer;
 var animationPlayer;
 
@@ -22,7 +21,7 @@ export var speed = 280;
 export var runningMultiplier = 1.3;
 export var jumpForce = 450;
 export var gravityScale = 1200;
-export var slideness = 10;
+export var slideness = 100;
 
 #player animations
 export var idleAnimationName="";
@@ -45,11 +44,10 @@ enum Direction {L=-1, R=1}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	body = get_node("player_body");
+	sprite = get_node("player_body/sprite");
 	camera = get_node("camera");
-	raycast1 = body.get_node("rayCast1");
-	raycast2 = body.get_node("rayCast2");
 	audioStreamPlayer = get_node("audioStreamPlayer");
-	animationPlayer = get_node("player_body/sprite/animationPlayer");
+	animationPlayer = sprite.get_node("animationPlayer");
 	
 	lifelable = get_node("hud/container/Top/life");
 	
@@ -65,35 +63,27 @@ func _ready():
 func _process(delta):
 	handleInput()
 	velocity.y += gravityScale * delta;
-	velocity+= slide()* delta;
+	velocity+=slide()
 	velocity = body.move_and_slide(velocity, up);
 	pass
 
 func slide():
-	var ground1 = raycast1.get_collider();
-	var ground2 = raycast2.get_collider();
-	var rotationDegrees = 0.0;
-	var divideBy = 0;
-	if ground1!=null :
-		rotationDegrees += ground1.rotation_degrees;
-		divideBy+=1;
-		pass
-	if ground2!=null :
-		rotationDegrees += ground2.rotation_degrees;
-		divideBy+=1;
-		pass
-	if rotationDegrees==0 :
-		body.rotation_degrees = 0;
-		return Vector2()
-
-	rotationDegrees = rotationDegrees / divideBy;
-	body.rotation_degrees = rotationDegrees;
-	return Vector2(1,0.5)* ( rad2deg(rotationDegrees)* slideness )
+	if body.get_slide_count() > 0 and body.is_on_floor():
+		var collision = body.get_slide_collision(0);
+		var normal = collision.get_normal()
+		var angleDelta = normal.angle() - (body.rotation - (PI*0.5))
+		if abs(angleDelta + body.rotation)<0.8:
+			body.rotation += angleDelta;
+		else:
+			body.rotation = 0;
+		return normal*slideness*Vector2(1,0);
+	return Vector2();
 
 func handleInput():
 	velocity.x = 0;
 	if Input.is_action_pressed("player_jump"):
 		if body.is_on_floor():
+			body.rotation = 0;
 			velocity.y = -jumpForce;
 			pass
 		pass
@@ -129,6 +119,8 @@ func _on_CollisionDetector_body_entered(collider):
 		onCollideCollectable(collider.name);
 		collider.queue_free();
 		pass
+	if "DeadZone" in collider.name:
+		damage()
 		
 func _on_CollisionDetector_area_entered(area):
 	if "DeadZone" in area.name:

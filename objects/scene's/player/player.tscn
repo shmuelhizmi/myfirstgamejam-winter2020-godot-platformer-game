@@ -31,14 +31,6 @@ texture = ExtResource( 2 )
 
 [node name="animationPlayer" type="AnimationPlayer" parent="player_body/sprite"]
 
-[node name="rayCast1" type="RayCast2D" parent="player_body"]
-position = Vector2( -30, 0 )
-enabled = true
-
-[node name="rayCast2" type="RayCast2D" parent="player_body"]
-position = Vector2( 30, 0 )
-enabled = true
-
 [node name="CollisionDetector" type="Area2D" parent="player_body"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]

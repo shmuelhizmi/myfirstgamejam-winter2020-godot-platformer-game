@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export(int) var slideness = 0.2
+export(int) var slideness = 100;
 export(int) var speed = 280;
 
 var velocity:Vector2 = Vector2()
@@ -20,30 +20,25 @@ func _physics_process(delta):
 	# If left hand is a hole, then go right
 	if !raycast1.is_colliding():
 		currentDirection = Direction.R
+		#print("right turn");
 		pass
 	# If right hand is a hole, then go left
 	if !raycast2.is_colliding():
 		currentDirection = Direction.L
+		#print("left turn");
 		pass
 	velocity = move_and_slide(velocity, up)
 
 # Slide algorithm, basically the same with player.gd
 # Consider making a component to make all things slide the same way (obstacles, enemies, player)?
 func slide():
-	var ground1 = raycast1.get_collider()
-	var ground2 = raycast2.get_collider()
-	var rotationDegrees = 0.0
-	var divideBy = 0
-	if ground1 != null and not "player" in ground1.name :
-		rotationDegrees += ground1.rotation_degrees
-		divideBy+=1;
-		pass
-	if ground1 != null and not "player" in ground1.name :
-		rotationDegrees += ground1.rotation_degrees
-		divideBy+=1
-		pass
-	if rotationDegrees==0 :
-		return Vector2()
-	rotationDegrees = rotationDegrees / divideBy
-	rotation_degrees = rotationDegrees
-	return (Vector2(1,1)* ( rad2deg(rotationDegrees)* slideness ))
+	if get_slide_count() > 0 and is_on_floor():
+		var collision = get_slide_collision(0);
+		var normal = collision.get_normal()
+		var angleDelta = normal.angle() - (rotation - (PI*0.5))
+		if abs(angleDelta + rotation)<0.8:
+			rotation += angleDelta;
+		else:
+			rotation = 0;
+		return normal*slideness*Vector2(1,0);
+	return Vector2();
