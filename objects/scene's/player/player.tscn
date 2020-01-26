@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/penguin.png" type="Texture" id=2]
 [ext_resource path="res://objects/scene's/ui/hud.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 6 )
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 22.4642
+height = 31.4068
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 31.2958
+height = 15.2174
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,8 +22,7 @@ current = true
 [node name="body" type="KinematicBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
-scale = Vector2( 4.5, 6 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="sprite" type="Sprite" parent="body"]
 scale = Vector2( 0.0447019, 0.0487869 )
@@ -34,6 +38,12 @@ enabled = true
 position = Vector2( 30, 0 )
 enabled = true
 
+[node name="CollisionDetector" type="Area2D" parent="body"]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/CollisionDetector"]
+shape = SubResource( 2 )
+
 [node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [node name="hud" parent="." instance=ExtResource( 3 )]
@@ -45,3 +55,4 @@ layer = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
+[connection signal="body_entered" from="body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

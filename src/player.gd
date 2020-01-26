@@ -65,10 +65,10 @@ func _process(delta):
 	velocity.y += gravityScale * delta;
 	velocity+= slide()* delta;
 	velocity = body.move_and_slide(velocity, up);
-	for i in body.get_slide_count():
-    	var collision = body.get_slide_collision(i)
-    	onCollide(collision.collider)
-	pass
+	#for i in body.get_slide_count():
+    #	var collision = body.get_slide_collision(i)
+    #	onCollide(collision.collider)
+	#pass
 
 func slide():
 	var ground1 = raycast1.get_collider();
@@ -114,16 +114,16 @@ func actionMove(directin, isRunning):
 		velocity.x += speed * directin;
 	pass
 	
-func onCollide(collider):
-	if "enemy" in collider.name:
-		damage();
-		pass
-	if "checkpoint" in collider.name:
-		lastCheckpoint = collider.position;
-		print(lastCheckpoint);
-		collider.queue_free();
-		pass
-	pass
+#func onCollide(collider):
+#	if "enemy" in collider.name:
+#		damage();
+#		pass
+#	if "checkpoint" in collider.name:
+#		lastCheckpoint = collider.position;
+#		print(lastCheckpoint);
+#		collider.queue_free();
+#		pass
+#	pass
 	
 func damage():
 	lifes=lifes-1;
@@ -135,6 +135,7 @@ func damage():
 		body.position = lastCheckpoint;
 		pass	
 	pass
+
 func drawLifes():
 	var lifecount = 0;
 	lifelable.text="";
@@ -147,3 +148,12 @@ func drawLifes():
 			lifelable.text+="♥";
 			pass
 		pass
+
+func _on_CollisionDetector_body_entered(collider):
+	print(1)
+	if collider.is_in_group("enemy"):
+		damage();
+	if "checkpoint" in collider.name:
+		lastCheckpoint = collider.position;
+		print(lastCheckpoint);
+		collider.queue_free();
