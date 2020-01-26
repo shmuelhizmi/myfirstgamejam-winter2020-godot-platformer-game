@@ -25,6 +25,7 @@ current = true
 shape = SubResource( 3 )
 
 [node name="sprite" type="Sprite" parent="body"]
+editor/display_folded = true
 scale = Vector2( 0.0447019, 0.0487869 )
 texture = ExtResource( 2 )
 
@@ -54,4 +55,5 @@ layer = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
+[connection signal="area_entered" from="body/CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

@@ -150,10 +150,13 @@ func drawLifes():
 		pass
 
 func _on_CollisionDetector_body_entered(collider):
-	print(1)
 	if collider.is_in_group("enemy"):
 		damage();
 	if "checkpoint" in collider.name:
 		lastCheckpoint = collider.position;
 		print(lastCheckpoint);
 		collider.queue_free();
+		
+func _on_CollisionDetector_area_entered(area):
+	if "DeadZone" in area.name:
+		damage()
