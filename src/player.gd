@@ -104,20 +104,8 @@ func actionMove(directin, isRunning):
 	pass
 	
 func _on_CollisionDetector_body_entered(collider):
-	if "enemy" in collider.name:
+	if collider.is_in_group("enemy"):
 		damage();
-		pass
-	if "checkpoint" in collider.name:
-		lastCheckpoint = collider.position;
-		collider.queue_free();
-		pass
-	if "camerapoint" in collider.name:
-		camera.position.x = collider.position.x;
-		collider.queue_free();
-		pass
-	if "collectable" in collider.name:
-		onCollideCollectable(collider.name);
-		collider.queue_free();
 		pass
 	if "DeadZone" in collider.name:
 		damage()
@@ -125,6 +113,17 @@ func _on_CollisionDetector_body_entered(collider):
 func _on_CollisionDetector_area_entered(area):
 	if "DeadZone" in area.name:
 		damage()
+	if "checkpoint" in area.name:
+		lastCheckpoint = area.position;
+		area.queue_free();
+		pass
+	if "camerapoint" in area.name:
+		camera.position.x = area.position.x;
+		pass
+	if "collectable" in area.name:
+		onCollideCollectable(area.name);
+		area.queue_free();
+		pass
 		
 func onCollideCollectable(collectable):
 	if "speed" in collectable:
