@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/ui/theme.res" type="Theme" id=1]
-[ext_resource path="res://objects/particals/snow.res" type="Material" id=2]
+[ext_resource path="res://assets/sprites/ability_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/ability_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/ability_3.png" type="Texture" id=4]
+[ext_resource path="res://objects/particals/snow.res" type="Material" id=5]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -27,6 +30,48 @@ theme = ExtResource( 1 )
 text = "♥♥♥ "
 align = 1
 
+[node name="abilities" type="Control" parent="container/Top"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -227.0
+margin_bottom = 40.0
+
+[node name="run" type="TextureRect" parent="container/Top/abilities"]
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -39.1697
+margin_top = -14.8679
+margin_right = -7.16974
+margin_bottom = 17.1321
+texture = ExtResource( 2 )
+
+[node name="ice" type="TextureRect" parent="container/Top/abilities"]
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -75.7729
+margin_top = -15.2453
+margin_right = -43.7729
+margin_bottom = 16.7547
+texture = ExtResource( 3 )
+
+[node name="bunny" type="TextureRect" parent="container/Top/abilities"]
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -111.999
+margin_top = -15.2453
+margin_right = -79.9986
+margin_bottom = 16.7547
+texture = ExtResource( 4 )
+
 [node name="snow" type="Node2D" parent="."]
 
 [node name="Particles2D" type="Particles2D" parent="snow"]
@@ -34,11 +79,11 @@ position = Vector2( 788.488, 102.406 )
 amount = 6
 lifetime = 5.0
 explosiveness = 0.27
-process_material = ExtResource( 2 )
+process_material = ExtResource( 5 )
 
 [node name="Particles2D2" type="Particles2D" parent="snow"]
 position = Vector2( 302.565, 99.8218 )
 amount = 14
 lifetime = 12.0
 explosiveness = 0.27
-process_material = ExtResource( 2 )
+process_material = ExtResource( 5 )

@@ -9,7 +9,11 @@ onready var animationPlayer :AnimationPlayer = sprite.get_node("animationPlayer"
 
 #ui
 onready var lifelable :Label = get_node("hud/container/Top/life");
-
+onready var abilities = {
+	run=get_node("hud/container/Top/abilities/run"),
+	ice=get_node("hud/container/Top/abilities/ice"),
+	bunny=get_node("hud/container/Top/abilities/bunny")
+	};
 
 	#player properties
 #logic properties
@@ -127,6 +131,12 @@ func onCollideCollectable(collectable):
 	if "speed" in collectable:
 		startCollectable(getCollectableTime(collectable),"start_ability_speed","end_ability_speed");
 	pass
+	if "ice" in collectable:
+		startCollectable(getCollectableTime(collectable),"start_ability_ice","end_ability_ice");
+	pass
+	if "bunny" in collectable:
+		startCollectable(getCollectableTime(collectable),"start_ability_bunny","end_ability_bunny");
+	pass
 func startCollectable(time,startFunction,endFunction):
 	var timer = Timer.new();
 	timer.one_shot = true;
@@ -174,10 +184,29 @@ func drawLifes():
 #abilities
 
 func start_ability_speed():
+	abilities.run.visible = true;
 	speed+=90;
 	pass
 
 func end_ability_speed():
+	abilities.run.visible = false;
 	speed+=-90;
 	pass
-	
+func start_ability_ice():
+	abilities.ice.visible = true;
+	slideness+=190;
+	pass
+
+func end_ability_ice():
+	abilities.ice.visible = false;
+	slideness+=-190;
+	pass
+func start_ability_bunny():
+	abilities.bunny.visible = true;
+	jumpForce+=230;
+	pass
+
+func end_ability_bunny():
+	abilities.bunny.visible = false;
+	jumpForce+=-230;
+	pass
