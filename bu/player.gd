@@ -179,9 +179,9 @@ func drawLifes():
 #abilities
 
 func start_ability_speed():
-	speed+=90;
+	print("ability speed");
 	pass
 
 func end_ability_speed():
-	speed+=-90;
+	print("ability speed stoped");
 	pass
