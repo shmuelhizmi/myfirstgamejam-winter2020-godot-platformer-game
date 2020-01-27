@@ -43,7 +43,6 @@ var walkAudioStream;
 
 var velocity = Vector2();
 var up = Vector2(0, -1);
-onready var cureentCameraTarget	 = camera.position.x;
 var currentAction = "idle";
 
 enum Direction {L=-1, R=1}
@@ -93,9 +92,11 @@ func handleInput():
 
 
 func update_camera(delta):
-	if cureentCameraTarget > camera.position.x:
+	if body.position.x > camera.position.x:
 		camera.position+=Vector2(delta*cameraSpeed,0)
-	pass
+	else:
+		camera.position+=-Vector2(delta*cameraSpeed,0)
+		pass
 
 func actionMove(directin, isRunning):
 	if isRunning :
@@ -119,9 +120,6 @@ func _on_CollisionDetector_area_entered(area):
 		lastCheckpoint = area.position;
 		area.queue_free();
 		pass
-	if "camerapoint" in area.name:
-		cureentCameraTarget = area.position.x;
-		pass
 	if "collectable" in area.name:
 		onCollideCollectable(area.name);
 		area.queue_free();
@@ -137,6 +135,7 @@ func onCollideCollectable(collectable):
 	if "bunny" in collectable:
 		startCollectable(getCollectableTime(collectable),"start_ability_bunny","end_ability_bunny");
 	pass
+	
 func startCollectable(time,startFunction,endFunction):
 	var timer = Timer.new();
 	timer.one_shot = true;
@@ -163,6 +162,7 @@ func damage():
 		get_tree().reload_current_scene();
 		pass
 	else:
+		get_parent().call("reset_enemies");
 		body.position = lastCheckpoint;
 		pass	
 	pass

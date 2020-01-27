@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://objects/scene's/danger objects/spike.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/spike.gd" type="Script" id=2]
+[ext_resource path="res://objects/scene's/enemy/polar_bear.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/polar_bear.gd" type="Script" id=4]
+
+[node name="testArea_enemies" type="Node2D"]
+editor/display_folded = true
+
+[node name="spike" type="KinematicBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 205.634, 111.969 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="spike2" type="KinematicBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 227.855, 112.006 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="spike3" type="KinematicBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 248.875, 112.006 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="polar_bear" type="KinematicBody2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( -212.78, 80.4704 )
+scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 4 )
