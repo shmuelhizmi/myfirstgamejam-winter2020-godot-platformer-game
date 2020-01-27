@@ -23,7 +23,7 @@ var lastCheckpoint;
 # movement properties
 export var speed = 280;
 export var runningMultiplier = 1.3;
-export var jumpForce = 450;
+export var jumpForce = 500;
 export var gravityScale = 20;
 export var slideness = 450;
 export var slidenessAccumulation = 0.3;

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://objects/ui/theme.res" type="Theme" id=1]
 [ext_resource path="res://assets/sprites/ability_1.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/ability_2.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/ability_3.png" type="Texture" id=4]
 [ext_resource path="res://objects/particals/snow.res" type="Material" id=5]
+[ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -76,10 +77,10 @@ texture = ExtResource( 4 )
 
 [node name="Particles2D" type="Particles2D" parent="snow"]
 position = Vector2( 788.488, 102.406 )
-amount = 6
+amount = 10
 lifetime = 5.0
-explosiveness = 0.27
 process_material = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Particles2D2" type="Particles2D" parent="snow"]
 position = Vector2( 302.565, 99.8218 )
@@ -87,3 +88,5 @@ amount = 14
 lifetime = 12.0
 explosiveness = 0.27
 process_material = ExtResource( 5 )
+texture = ExtResource( 6 )
+

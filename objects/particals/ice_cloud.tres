@@ -1,0 +1,13 @@
+[gd_resource type="ParticlesMaterial" format=2]
+
+[resource]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 379.31
+angular_velocity = 1.68156e-044
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+
