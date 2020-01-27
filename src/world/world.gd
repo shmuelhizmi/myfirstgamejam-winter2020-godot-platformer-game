@@ -1,9 +1,11 @@
 extends Node2D
 
+onready var enemies = $enemies
 
 func reset_enemies():
-	for i in range(0, $enemies.get_child_count()):
-    	$enemies.get_child(i).queue_free()
+	for i in range(0, enemies.get_child_count()):
+		var enemy = enemies.get_child(i)
+		enemy.queue_free()
 	var enemies = preload("res://objects/scene's/maps/testArea_enemies.tscn").instance()
 	$enemies.add_child(enemies);
 	pass

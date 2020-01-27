@@ -29,5 +29,4 @@ modulate = Color( 0.686275, 0.611765, 0.105882, 1 )
 position = Vector2( 19.9515, -8.74809 )
 scale = Vector2( 1.74245, 1.21789 )
 texture = ExtResource( 2 )
-
 [connection signal="body_entered" from="touch_to_jump" to="." method="_on_toch_to_jump_body_entered"]

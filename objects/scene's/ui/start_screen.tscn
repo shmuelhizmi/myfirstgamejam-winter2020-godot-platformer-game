@@ -143,12 +143,11 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-editor/display_folded = true
 anims/fade_in = SubResource( 1 )
 anims/fade_out = SubResource( 2 )
 
 [node name="fade" type="Sprite" parent="AnimationPlayer"]
-modulate = Color( 0, 0, 0, 0 )
+modulate = Color( 0, 0, 0, 1 )
 position = Vector2( -47.4863, -28.4889 )
 scale = Vector2( 0.747374, 0.822651 )
 texture = ExtResource( 2 )
@@ -180,9 +179,10 @@ lifetime = 13.9
 process_material = SubResource( 5 )
 
 [node name="buttons" type="Node2D" parent="."]
-editor/display_folded = true
+position = Vector2( 29.0213, 0 )
 
 [node name="start" type="Button" parent="buttons"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 338.0
 margin_top = 157.0
 margin_right = 697.0
@@ -205,6 +205,7 @@ text = "start"
 align = 1
 
 [node name="options" type="Button" parent="buttons"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 371.0
 margin_top = 283.512
 margin_right = 659.0
@@ -227,6 +228,7 @@ text = "options"
 align = 1
 
 [node name="exit" type="Button" parent="buttons"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 427.0
 margin_top = 383.0
 margin_right = 595.0
@@ -247,7 +249,6 @@ custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
 text = "EXIT"
 align = 1
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="mouse_entered" from="buttons/start" to="." method="_on_start_mouse_entered"]
 [connection signal="mouse_exited" from="buttons/start" to="." method="_on_start_mouse_exited"]

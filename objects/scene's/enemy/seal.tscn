@@ -49,6 +49,7 @@ shape = SubResource( 2 )
 script = ExtResource( 3 )
 
 [node name="idle" type="Node" parent="stateMachine"]
+editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="timer" type="Timer" parent="stateMachine/idle"]
@@ -60,5 +61,4 @@ script = ExtResource( 5 )
 
 [node name="jump" type="Node" parent="stateMachine"]
 script = ExtResource( 6 )
-
 [connection signal="body_entered" from="collisionDetector" to="stateMachine/seek" method="_on_collisionDetector_body_entered"]
