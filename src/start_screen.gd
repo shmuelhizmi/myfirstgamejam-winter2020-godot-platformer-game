@@ -37,9 +37,11 @@ func _on_exit_pressed():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == 'fade_out':
 		if go_to == 'start':
+#warning-ignore:return_value_discarded
 			get_tree().change_scene("res://objects/scene\'s/maps/testArea.tscn")
 		
 		elif go_to == 'options':
+#warning-ignore:return_value_discarded
 			get_tree().change_scene("res://objects/scene\'s/ui/options.tscn")
 		
 		elif go_to == 'exit':
