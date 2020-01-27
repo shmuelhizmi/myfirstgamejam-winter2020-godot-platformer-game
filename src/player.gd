@@ -27,7 +27,6 @@ export var jumpForce = 450;
 export var gravityScale = 1200;
 export var slideness = 100;
 
-export var cameraSpeed = 2220 ;
 
 #player animations
 export var idleAnimationName="";
@@ -94,10 +93,10 @@ func handleInput():
 
 
 func update_camera(delta):
-	if body.position.x > camera.position.x+40:
-		camera.position+=Vector2(delta*cameraSpeed,0)
-	elif body.position.x < camera.position.x-40:
-		camera.position+=-Vector2(delta*(cameraSpeed+abs(body.position.x-camera.position.x)),0)
+	if body.position.x > camera.position.x-100:
+		camera.position+=Vector2(delta*(abs(body.position.x-camera.position.x+200)),0)
+	elif body.position.x < camera.position.x:
+		camera.position+=-Vector2(delta*(abs(body.position.x-camera.position.x)),0)
 		pass
 
 

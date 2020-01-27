@@ -329,6 +329,4 @@ shape = SubResource( 4 )
 [node name="jumping_platform2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 4146.31, -21.3996 )
 
-[node name="enemies" type="Node2D" parent="."]
-
-[node name="testArea_enemies" parent="enemies" instance=ExtResource( 10 )]
+[node name="enemies" parent="." instance=ExtResource( 10 )]
