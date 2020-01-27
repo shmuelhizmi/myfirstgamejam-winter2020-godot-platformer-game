@@ -24,8 +24,9 @@ var lastCheckpoint;
 export var speed = 280;
 export var runningMultiplier = 1.3;
 export var jumpForce = 450;
-export var gravityScale = 1200;
-export var slideness = 100;
+export var gravityScale = 20;
+export var slideness = 450;
+export var slidenessAccumulation = 0.3;
 
 
 #player animations
@@ -44,6 +45,8 @@ var velocity = Vector2();
 var up = Vector2(0, -1);
 var currentAction = "idle";
 
+var ice = false;
+
 enum Direction {L=-1, R=1}
 
 
@@ -55,13 +58,12 @@ func _ready():
 
 func _process(delta):
 	handleInput()
-	velocity.y += gravityScale * delta;
-	velocity+=slide()
+	velocity.y += gravityScale;
 	velocity = body.move_and_slide(velocity, up);
 	update_camera(delta);
 	pass
 
-
+var slideForce = 0;
 func slide():
 	if body.get_slide_count() > 0 and body.is_on_floor():
 		var collision = body.get_slide_collision(0);
@@ -71,25 +73,40 @@ func slide():
 			body.rotation += angleDelta;
 		else:
 			body.rotation = 0;
-		return normal*slideness*Vector2(1,0);
+		var resualt = normal*slideness*Vector2(1,-0.5);
+		slideForce+=resualt.x*slidenessAccumulation;
+		return resualt;
 	return Vector2();
 
 
 func handleInput():
+	var slideDown = Input.is_action_pressed("player_slide");
+	var jumpDown = Input.is_action_pressed("player_jump");
+	var rightDown = Input.is_action_pressed("player_right");
+	var leftDown = Input.is_action_pressed("player_left");
+	var slidenessAccumulationStep = slideForce*(slidenessAccumulation);
+	slideForce+= -slidenessAccumulationStep/5;
 	velocity.x = 0;
-	if Input.is_action_pressed("player_jump"):
-		if body.is_on_floor():
-			body.rotation = 0;
-			velocity.y = -jumpForce;
+	if not slideDown or (rightDown or leftDown):
+		body.rotation = 0;
+		velocity.x+=slidenessAccumulationStep;
+		if jumpDown:
+			if body.is_on_floor():
+				actionJump();
+				pass
+			pass
+		if rightDown:
+			actionMove(Direction.R);
+			pass
+		if leftDown:
+			actionMove(Direction.L);
 			pass
 		pass
-	if Input.is_action_pressed("player_right"):
-		actionMove(Direction.R,Input.is_action_pressed("player_run"));
-		pass
-	if Input.is_action_pressed("player_left"):
-		actionMove(Direction.L,Input.is_action_pressed("player_run"));
-		pass
-	pass
+		if ice:
+			velocity += slide()*0.3;
+			pass
+	else:
+		velocity += slide();
 
 
 func update_camera(delta):
@@ -99,13 +116,12 @@ func update_camera(delta):
 		camera.position+=-Vector2(delta*(abs(body.position.x-camera.position.x)),0)
 		pass
 
+func actionJump(extraVelocity=0):
+	velocity.y = -jumpForce-extraVelocity;
+	pass
 
-func actionMove(directin, isRunning):
-	if isRunning :
-		velocity.x += speed * directin * runningMultiplier;
-		pass
-	else:
-		velocity.x += speed * directin;
+func actionMove(directin):
+	velocity.x += (speed * directin);
 	pass
 
 
@@ -207,12 +223,14 @@ func end_ability_speed():
 
 func start_ability_ice():
 	abilities.ice.visible = true;
+	ice= true;
 	slideness+=190;
 	pass
 
 
 func end_ability_ice():
 	abilities.ice.visible = false;
+	ice  = false;
 	slideness+=-190;
 	pass
 
