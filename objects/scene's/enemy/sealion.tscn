@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/sealion.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/sealion/6881ec8f81f229371c7bbab673f8a54a-removebg-preview.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 30.8556
+height = 14.7685
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16.0759, 7.21938 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 27.4235, 28.7298 )
+
+[node name="sealion" type="KinematicBody2D"]
+script = ExtResource( 1 )
+vulnerableSprite = ExtResource( 2 )
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.7, 0.7 )
+shape = SubResource( 1 )
+
+[node name="sprite" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+
+[node name="rayCast1" type="RayCast2D" parent="."]
+position = Vector2( -28.6789, 0 )
+enabled = true
+
+[node name="rayCast2" type="RayCast2D" parent="."]
+position = Vector2( 29.0562, 0 )
+enabled = true
+
+[node name="rayCast3" type="RayCast2D" parent="."]
+position = Vector2( 0, -35 )
+rotation = 1.57079
+enabled = true
+cast_to = Vector2( 0, 40 )
+
+[node name="rayCast4" type="RayCast2D" parent="."]
+position = Vector2( 0, -35 )
+rotation = -1.57079
+enabled = true
+cast_to = Vector2( 0, 40 )
+
+[node name="vulnerableArea" type="Area2D" parent="."]
+position = Vector2( 0, -45 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="vulnerableArea"]
+shape = SubResource( 2 )
+
+[node name="unvulnerableArea" type="Area2D" parent="."]
+position = Vector2( 1.08073, 2.01155 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="unvulnerableArea"]
+shape = SubResource( 3 )
+
+[node name="sealion" type="Node2D" parent="." groups=[
+"enemy",
+]]
+[connection signal="area_entered" from="vulnerableArea" to="." method="_on_vulnerableArea_area_entered"]
+[connection signal="body_entered" from="vulnerableArea" to="." method="_on_vulnerableArea_body_entered"]
+[connection signal="body_entered" from="unvulnerableArea" to="." method="_on_unvulnerableArea2_body_entered"]
