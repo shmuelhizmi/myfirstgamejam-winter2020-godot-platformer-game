@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export(int) var slideness = 100;
-export(int) var speed = 280;
+export(int) var speed = 180;
 
 var velocity:Vector2 = Vector2()
 var up:Vector2 = Vector2(0, -1)
@@ -9,24 +9,30 @@ var gravityScale = 1200
 enum Direction {L=-1, R=1}
 
 var currentDirection:int = Direction.L
+# raycast 1,2 are for detecting gap (Left, Right)
 onready var raycast1: RayCast2D = $rayCast1
 onready var raycast2: RayCast2D = $rayCast2
+# raycast 3,4 are for detecting sides collision (Left, Right)
+onready var raycast3: RayCast2D = $rayCast3
+onready var raycast4: RayCast2D = $rayCast4
 
 func _physics_process(delta):
 	velocity.y += gravityScale * delta
 	velocity.x = currentDirection * speed
 	velocity += slide()
 	
-	# If left hand is a hole, then go right
+	# If left hand is a gap or wall, then go right
 	if !raycast1.is_colliding():
 		currentDirection = Direction.R
-		#print("right turn");
-		pass
-	# If right hand is a hole, then go left
+	if raycast3.is_colliding() and raycast3.get_collider().name != "player_body":
+		currentDirection = Direction.R
+	
+	# If right hand is a gap or wall, then go left
 	if !raycast2.is_colliding():
 		currentDirection = Direction.L
-		#print("left turn");
-		pass
+	if raycast4.is_colliding() and raycast4.get_collider().name != "player_body":
+		currentDirection = Direction.L
+
 	velocity = move_and_slide(velocity, up)
 
 # Slide algorithm, basically the same with player.gd

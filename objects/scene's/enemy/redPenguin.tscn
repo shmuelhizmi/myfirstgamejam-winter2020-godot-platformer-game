@@ -28,3 +28,15 @@ enabled = true
 [node name="rayCast2" type="RayCast2D" parent="."]
 position = Vector2( 29.0562, 0 )
 enabled = true
+
+[node name="rayCast3" type="RayCast2D" parent="."]
+position = Vector2( 0, -35 )
+rotation = 1.57079
+enabled = true
+cast_to = Vector2( 0, 40 )
+
+[node name="rayCast4" type="RayCast2D" parent="."]
+position = Vector2( 0, -35 )
+rotation = -1.57079
+enabled = true
+cast_to = Vector2( 0, 40 )
