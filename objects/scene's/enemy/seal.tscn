@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/seal.gd" type="Script" id=1]
+[ext_resource path="res://src/seal/seal.gd" type="Script" id=1]
 [ext_resource path="res://assets/seal.png" type="Texture" id=2]
+[ext_resource path="res://src/stateMachine.gd" type="Script" id=3]
+[ext_resource path="res://src/seal/seal_idle.gd" type="Script" id=4]
+[ext_resource path="res://src/seal/seal_seek.gd" type="Script" id=5]
+[ext_resource path="res://src/seal/seal_jump.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.6803
@@ -35,8 +39,26 @@ enabled = true
 cast_to = Vector2( 0, 25 )
 
 [node name="collisionDetector" type="Area2D" parent="."]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="collisionDetector"]
 position = Vector2( 0, -20.7983 )
 shape = SubResource( 2 )
+
+[node name="stateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="idle" type="Node" parent="stateMachine"]
+script = ExtResource( 4 )
+
+[node name="timer" type="Timer" parent="stateMachine/idle"]
+wait_time = 2.0
+one_shot = true
+
+[node name="seek" type="Node" parent="stateMachine"]
+script = ExtResource( 5 )
+
+[node name="jump" type="Node" parent="stateMachine"]
+script = ExtResource( 6 )
 [connection signal="body_entered" from="collisionDetector" to="." method="_on_collisionDetector_body_entered"]
+[connection signal="body_entered" from="collisionDetector" to="stateMachine/seek" method="_on_collisionDetector_body_entered"]

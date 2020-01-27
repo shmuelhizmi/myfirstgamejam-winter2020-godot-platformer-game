@@ -32,12 +32,3 @@ func slide():
 			rotation = 0;
 		return normal*slideness*Vector2(1,0);
 	return Vector2();
-
-# Jump to the global position of "to"
-func jump_to(to):
-	velocity += ((to - global_position).normalized() + Vector2(0, -1)) * jump_force
-
-func _on_collisionDetector_body_entered(body):
-	print(body.name)
-	if body.name == "player_body":
-		jump_to(body.global_position)
