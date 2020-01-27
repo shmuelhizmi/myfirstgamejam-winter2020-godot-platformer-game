@@ -38,7 +38,6 @@ func _physics_process(delta):
 	
 	
 	if attack == true:
-		print(target.position.x)
 		if is_instance_valid(target) == true:
 			if self.position.x > target.position.x - 100:
 				right = false
