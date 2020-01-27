@@ -1,14 +1,14 @@
 extends Node
 
 #player nodes
-onready var body: KinematicBody2D = get_node("player_body");
-onready var sprite :Sprite= get_node("player_body/sprite");
-onready var camera :Camera2D = get_node("camera");
-onready var audioStreamPlayer :AudioStreamPlayer2D = get_node("audioStreamPlayer");
-onready var animationPlayer :AnimationPlayer = sprite.get_node("animationPlayer");
+onready var body : KinematicBody2D = get_node("player_body");
+onready var sprite : Sprite= get_node("player_body/sprite");
+onready var camera : Camera2D = get_node("camera");
+onready var audioStreamPlayer : AudioStreamPlayer2D = get_node("audioStreamPlayer");
+onready var animationPlayer : AnimationPlayer = sprite.get_node("animationPlayer");
 
 #ui
-onready var lifelable :Label = get_node("hud/container/Top/life");
+onready var lifelable : Label = get_node("hud/container/Top/life");
 onready var abilities = {
 	run=get_node("hud/container/Top/abilities/run"),
 	ice=get_node("hud/container/Top/abilities/ice"),
@@ -47,12 +47,12 @@ var currentAction = "idle";
 
 enum Direction {L=-1, R=1}
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	drawLifes();
 	lastCheckpoint = body.position;
-	
-	pass # Replace with function body.
+	pass
+
 
 func _process(delta):
 	handleInput()
@@ -61,6 +61,7 @@ func _process(delta):
 	velocity = body.move_and_slide(velocity, up);
 	update_camera(delta);
 	pass
+
 
 func slide():
 	if body.get_slide_count() > 0 and body.is_on_floor():
@@ -73,6 +74,7 @@ func slide():
 			body.rotation = 0;
 		return normal*slideness*Vector2(1,0);
 	return Vector2();
+
 
 func handleInput():
 	velocity.x = 0;
@@ -95,8 +97,9 @@ func update_camera(delta):
 	if body.position.x > camera.position.x+40:
 		camera.position+=Vector2(delta*cameraSpeed,0)
 	elif body.position.x < camera.position.x-40:
-		camera.position+=-Vector2(delta*cameraSpeed,0)
+		camera.position+=-Vector2(delta*(cameraSpeed+abs(body.position.x-camera.position.x)),0)
 		pass
+
 
 func actionMove(directin, isRunning):
 	if isRunning :
@@ -105,14 +108,16 @@ func actionMove(directin, isRunning):
 	else:
 		velocity.x += speed * directin;
 	pass
-	
+
+
 func _on_CollisionDetector_body_entered(collider):
 	if collider.is_in_group("enemy"):
 		damage();
 		pass
 	if "DeadZone" in collider.name:
 		damage()
-		
+
+
 func _on_CollisionDetector_area_entered(area):
 	if "DeadZone" in area.name:
 		damage()
@@ -124,7 +129,8 @@ func _on_CollisionDetector_area_entered(area):
 		onCollideCollectable(area.name);
 		area.queue_free();
 		pass
-		
+
+
 func onCollideCollectable(collectable):
 	if "speed" in collectable:
 		startCollectable(getCollectableTime(collectable),"start_ability_speed","end_ability_speed");
@@ -135,7 +141,8 @@ func onCollideCollectable(collectable):
 	if "bunny" in collectable:
 		startCollectable(getCollectableTime(collectable),"start_ability_bunny","end_ability_bunny");
 	pass
-	
+
+
 func startCollectable(time,startFunction,endFunction):
 	var timer = Timer.new();
 	timer.one_shot = true;
@@ -144,6 +151,7 @@ func startCollectable(time,startFunction,endFunction):
 	add_child(timer);
 	timer.start(time);
 	pass
+
 
 func getCollectableTime(collectable):
 	var timeropen = "_time_";
@@ -154,7 +162,8 @@ func getCollectableTime(collectable):
 	if timestr != null:
 		return int(timestr);
 	return 30;
-	
+
+
 func damage():
 	lifes=lifes-1;
 	drawLifes();
@@ -162,11 +171,12 @@ func damage():
 		get_tree().reload_current_scene();
 		pass
 	else:
-		get_parent().call("reset_enemies");
 		body.position = lastCheckpoint;
+		get_parent().call("reset_enemies");
 		pass	
 	pass
-	
+
+
 func drawLifes():
 	var lifecount = 0;
 	lifelable.text="";
@@ -181,26 +191,32 @@ func drawLifes():
 		pass
 		
 	pass
-#abilities
 
+
+#abilities
 func start_ability_speed():
 	abilities.run.visible = true;
 	speed+=90;
 	pass
 
+
 func end_ability_speed():
 	abilities.run.visible = false;
 	speed+=-90;
 	pass
+
+
 func start_ability_ice():
 	abilities.ice.visible = true;
 	slideness+=190;
 	pass
 
+
 func end_ability_ice():
 	abilities.ice.visible = false;
 	slideness+=-190;
 	pass
+
 func start_ability_bunny():
 	abilities.bunny.visible = true;
 	jumpForce+=230;
@@ -210,3 +226,4 @@ func end_ability_bunny():
 	abilities.bunny.visible = false;
 	jumpForce+=-230;
 	pass
+
