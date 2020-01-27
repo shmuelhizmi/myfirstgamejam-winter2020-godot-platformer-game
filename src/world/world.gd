@@ -2,6 +2,9 @@ extends Node2D
 
 onready var enemies = $enemies
 
+func _ready():
+	get_tree().paused = false
+
 func reset_enemies():
 	for i in range(0, enemies.get_child_count()):
 		var enemy = enemies.get_child(i)

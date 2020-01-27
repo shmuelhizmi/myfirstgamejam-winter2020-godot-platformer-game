@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 
+
 uniform vec4 blue_tint : hint_color;
 
 uniform vec2 sprite_scale;

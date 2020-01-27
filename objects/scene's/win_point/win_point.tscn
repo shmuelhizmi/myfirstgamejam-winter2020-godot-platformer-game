@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://objects/scene's/win_point/win_point.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/win_point/win.png" type="Texture" id=2]
+[ext_resource path="res://assets/icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 79.1913, 693.971 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("icon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="win_point" type="Area2D"]
+pause_mode = 2
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+scene = "res://objects/scene's/maps/testArea.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+pause_mode = 2
+position = Vector2( -5.27427, -602.311 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+pause_mode = 2
+position = Vector2( -18.3136, -18.3136 )
+scale = Vector2( 2.18486, 2.18486 )
+texture = ExtResource( 2 )
+
+[node name="icon" type="Sprite" parent="."]
+pause_mode = 2
+modulate = Color( 0, 0, 0, 0 )
+scale = Vector2( 87.0593, 87.0593 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+anims/fade_out = SubResource( 2 )
+
+[node name="win_music" type="AudioStreamPlayer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_win_point_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="finished" from="win_music" to="." method="_on_win_music_finished"]
