@@ -4,19 +4,19 @@
 [ext_resource path="res://assets/pixil-frame-0.png" type="Texture" id=2]
 
 [node name="jumping_platform" type="KinematicBody2D"]
-scale = Vector2( 3, 3 )
+scale = Vector2( 2, 2.5 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="toch_to_jump" type="Area2D" parent="."]
+[node name="touch_to_jump" type="Area2D" parent="."]
 position = Vector2( 0, -3.82901 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="toch_to_jump"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="touch_to_jump"]
 rotation = 1.5708
 polygon = PoolVector2Array( -1.51603, 34.0955, -2.47358, 32.1573, -3.8922, 27.0669, -5.06047, 23.5621, -5.22737, -7.81435, -3.8922, -16.3261, -2.64048, -21.6667, -1.30531, -23.5026, -0.220487, -26.6736, 1.11468, -30.1784, 1.98046, -33.9474, 6.20501, -32.5984 )
 
@@ -30,4 +30,4 @@ position = Vector2( 19.9515, -8.74809 )
 scale = Vector2( 1.74245, 1.21789 )
 texture = ExtResource( 2 )
 
-[connection signal="body_entered" from="toch_to_jump" to="." method="_on_toch_to_jump_body_entered"]
+[connection signal="body_entered" from="touch_to_jump" to="." method="_on_toch_to_jump_body_entered"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://objects/scene's/danger objects/spike.gd" type="Script" id=1]
+[ext_resource path="res://src/spike.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/danger_objects/Spike_Up.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -20,10 +20,10 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="toch_to_die" type="Area2D" parent="."]
+[node name="touch_to_die" type="Area2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="toch_to_die"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="touch_to_die"]
 polygon = PoolVector2Array( -1.97143, -9.07256, -1.9037, -9.98693, -0.992964, -11.9595, 0.995178, -11.9864, 1.95697, -10.0208, 1.9231, -9.07256 )
 one_way_collision = true
 
-[connection signal="body_entered" from="toch_to_die" to="." method="_on_toch_to_die_body_entered"]
+[connection signal="body_entered" from="touch_to_die" to="." method="_on_toch_to_die_body_entered"]

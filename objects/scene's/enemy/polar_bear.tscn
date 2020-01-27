@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/polar_bear.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/polar_bear/371942-polar-bear-pixel-art.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 125.074
+height = 236.654
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 129.824
+height = 247.019
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 189.418
+height = 970.117
+
+[node name="polar_bear" type="KinematicBody2D"]
+scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.44409, 5.8345 )
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="touch_to_die" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="touch_to_die"]
+rotation = 1.5708
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="detact" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detact"]
+position = Vector2( 3.17334, -55.5337 )
+rotation = 1.5708
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="wait" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="touch_to_die" to="." method="_on_touch_to_die_body_entered"]
+[connection signal="body_entered" from="detact" to="." method="_on_detact_body_entered"]
+[connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]

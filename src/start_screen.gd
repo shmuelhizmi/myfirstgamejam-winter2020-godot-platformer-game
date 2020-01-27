@@ -52,25 +52,19 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 #buttons_anim:
 func _on_start_mouse_entered():
-	if can_click == true:
-		$buttons/start/name.modulate = Color(1, 1, 1, 0.6)
+	$buttons/start/name.modulate = Color(1, 1, 1, 0.6)
 
 func _on_start_mouse_exited():
-	if can_click == true:
-		$buttons/start/name.modulate = Color(1, 1, 1, 1)
+	$buttons/start/name.modulate = Color(1, 1, 1, 1)
 
 func _on_options_mouse_entered():
-	if can_click == true:
-		$buttons/options/name.modulate = Color(1, 1, 1, 0.6)
+	$buttons/options/name.modulate = Color(1, 1, 1, 0.6)
 
 func _on_options_mouse_exited():
-	if can_click == true:
-		$buttons/options/name.modulate = Color(1, 1, 1, 1)
+	$buttons/options/name.modulate = Color(1, 1, 1, 1)
 
 func _on_exit_mouse_entered():
-	if can_click == true:
-		$buttons/exit/name.modulate = Color(1, 1, 1, 0.6)
+	$buttons/exit/name.modulate = Color(1, 1, 1, 0.6)
 
 func _on_exit_mouse_exited():
-	if can_click == true:
-		$buttons/exit/name.modulate = Color(1, 1, 1, 1)
+	$buttons/exit/name.modulate = Color(1, 1, 1, 1)
