@@ -333,7 +333,7 @@ editor/display_folded = true
 
 [node name="enemies" parent="enemies" instance=ExtResource( 10 )]
 
-[node name="icon" type="Sprite" parent="enemies"]
+[node name="icon" type="Sprite" parent="."]
 material = SubResource( 5 )
 position = Vector2( 3327.93, 79.8023 )
 scale = Vector2( 2.98732, 0.508344 )
