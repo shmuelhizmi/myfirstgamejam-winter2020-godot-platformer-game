@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/jumping_platform.gd" type="Script" id=1]
+[ext_resource path="res://assets/pixil-frame-0.png" type="Texture" id=2]
+
+[node name="jumping_platform" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="toch_to_jump" type="Area2D" parent="."]
+position = Vector2( 0, -3.82901 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="toch_to_jump"]
+rotation = 1.5708
+polygon = PoolVector2Array( -1.51603, 34.0955, -2.47358, 32.1573, -3.8922, 27.0669, -5.06047, 23.5621, -5.22737, -7.81435, -3.8922, -16.3261, -2.64048, -21.6667, -1.30531, -23.5026, -0.220487, -26.6736, 1.11468, -30.1784, 1.98046, -33.9474, 6.20501, -32.5984 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+polygon = PoolVector2Array( -8.87466, 23.4114, -8.87466, -7.6316, -1.703, -33.6545, 3.31716, -33.8594, 8.23487, -30.7858, 11.6158, -9.16839, 10.6937, 11.0147, 9.4643, 28.9439, -0.576023, 34.0665, -5.18638, 34.2714 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.686275, 0.611765, 0.105882, 1 )
+position = Vector2( 19.9515, -8.74809 )
+scale = Vector2( 1.74245, 1.21789 )
+texture = ExtResource( 2 )
+
+[connection signal="body_entered" from="toch_to_jump" to="." method="_on_toch_to_jump_body_entered"]

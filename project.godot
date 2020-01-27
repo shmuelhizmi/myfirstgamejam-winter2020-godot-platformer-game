@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="myfirstgamejam-winter2020"
-run/main_scene="res://objects/scene's/ui/menu.tscn"
+run/main_scene="res://objects/scene's/ui/start_screen.tscn"
 config/icon="res://assets/icon.png"
 
 [input]

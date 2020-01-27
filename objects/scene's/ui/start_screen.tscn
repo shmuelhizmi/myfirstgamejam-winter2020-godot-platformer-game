@@ -1,0 +1,259 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://src/start_screen.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=2]
+[ext_resource path="res://objects/shaders/fog.shader" type="Shader" id=3]
+[ext_resource path="res://assets/icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="Animation" id=4]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/fade:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("buttons/start:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("buttons/options:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("buttons/exit:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("buttons:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.1, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 87.064, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/fade:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 3 )
+shader_param/color = Vector3( 0.1, 0.48, 0.95 )
+shader_param/OCTAVES = 4
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 379.31
+angular_velocity = 1.68156e-044
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -39.08
+radial_accel = -2.3
+scale = 5.0
+color = Color( 0.635294, 0.972549, 0.733333, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 70
+outline_size = 5
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 5
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+outline_size = 5
+font_data = ExtResource( 6 )
+
+[node name="start_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="background" type="Sprite" parent="."]
+scale = Vector2( 0.700173, 0.732527 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+editor/display_folded = true
+anims/fade_in = SubResource( 4 )
+anims/fade_out = SubResource( 5 )
+
+[node name="fade" type="Sprite" parent="AnimationPlayer"]
+modulate = Color( 0, 0, 0, 0 )
+position = Vector2( -47.4863, -28.4889 )
+scale = Vector2( 0.747374, 0.822651 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="fog" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.858824 )
+material = SubResource( 6 )
+position = Vector2( 513.61, 301.768 )
+scale = Vector2( 16.2495, 9.67657 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ice" type="Particles2D" parent="."]
+position = Vector2( -7.38789, -132.189 )
+rotation = 0.523599
+amount = 100
+lifetime = 13.9
+process_material = SubResource( 7 )
+texture = ExtResource( 5 )
+
+[node name="sparks" type="Particles2D" parent="."]
+position = Vector2( 489.082, 627.907 )
+rotation = 3.14159
+amount = 10
+lifetime = 13.9
+process_material = SubResource( 8 )
+
+[node name="buttons" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="start" type="Button" parent="buttons"]
+margin_left = 338.0
+margin_top = 157.0
+margin_right = 697.0
+margin_bottom = 231.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="name" type="Label" parent="buttons/start"]
+margin_left = 7.31342
+margin_top = 5.6449
+margin_right = 357.313
+margin_bottom = 75.6449
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
+text = "start"
+align = 1
+
+[node name="options" type="Button" parent="buttons"]
+margin_left = 371.0
+margin_top = 283.512
+margin_right = 659.0
+margin_bottom = 330.512
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="name" type="Label" parent="buttons/options"]
+margin_left = -63.7527
+margin_top = 5.3653
+margin_right = 356.247
+margin_bottom = 65.3653
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
+text = "options"
+align = 1
+
+[node name="exit" type="Button" parent="buttons"]
+margin_left = 427.0
+margin_top = 383.0
+margin_right = 595.0
+margin_bottom = 432.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="name" type="Label" parent="buttons/exit"]
+margin_left = -53.9687
+margin_top = 7.69427
+margin_right = 229.031
+margin_bottom = 57.6943
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
+text = "EXIT"
+align = 1
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="mouse_entered" from="buttons/start" to="." method="_on_start_mouse_entered"]
+[connection signal="mouse_exited" from="buttons/start" to="." method="_on_start_mouse_exited"]
+[connection signal="pressed" from="buttons/start" to="." method="_on_start_pressed"]
+[connection signal="mouse_entered" from="buttons/options" to="." method="_on_options_mouse_entered"]
+[connection signal="mouse_exited" from="buttons/options" to="." method="_on_options_mouse_exited"]
+[connection signal="pressed" from="buttons/options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="buttons/exit" to="." method="_on_exit_mouse_entered"]
+[connection signal="mouse_exited" from="buttons/exit" to="." method="_on_exit_mouse_exited"]
+[connection signal="pressed" from="buttons/exit" to="." method="_on_exit_pressed"]
