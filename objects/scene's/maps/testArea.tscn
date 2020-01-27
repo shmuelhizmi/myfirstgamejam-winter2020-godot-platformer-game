@@ -9,9 +9,9 @@
 [ext_resource path="res://objects/tilemap/water.tres" type="TileSet" id=7]
 [ext_resource path="res://objects/scene's/player/player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/scene's/platforms/jumping_platform.tscn" type="PackedScene" id=9]
-[ext_resource path="res://objects/shaders/water.shader" type="Shader" id=10]
-[ext_resource path="res://assets/icon.png" type="Texture" id=11]
-[ext_resource path="res://objects/scene's/maps/testArea_enemies.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/scene's/maps/testArea_enemies.tscn" type="PackedScene" id=10]
+[ext_resource path="res://objects/shaders/water.shader" type="Shader" id=11]
+[ext_resource path="res://assets/icon.png" type="Texture" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -25,7 +25,7 @@ extents = Vector2( 10, 60 )
 extents = Vector2( 50000, 18.772 )
 
 [sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 10 )
+shader = ExtResource( 11 )
 shader_param/blue_tint = Color( 0.647059, 0.972549, 0.964706, 1 )
 shader_param/sprite_scale = Vector2( 1.5, 1.5 )
 shader_param/scale_x = 0.67
@@ -328,14 +328,14 @@ shape = SubResource( 4 )
 [node name="jumping_platform2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 4146.31, -21.3996 )
 
-[node name="icon" type="Sprite" parent="."]
-material = SubResource( 5 )
-position = Vector2( 3327.93, 79.8023 )
-scale = Vector2( 2.98732, 0.508344 )
-texture = ExtResource( 11 )
-
 [node name="enemies" type="Node2D" parent="."]
 editor/display_folded = true
 
-[node name="enemies" parent="enemies" instance=ExtResource( 12 )]
+[node name="enemies" parent="enemies" instance=ExtResource( 10 )]
+
+[node name="icon" type="Sprite" parent="enemies"]
+material = SubResource( 5 )
+position = Vector2( 3327.93, 79.8023 )
+scale = Vector2( 2.98732, 0.508344 )
+texture = ExtResource( 12 )
 
