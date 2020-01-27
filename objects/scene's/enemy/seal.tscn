@@ -60,5 +60,4 @@ script = ExtResource( 5 )
 
 [node name="jump" type="Node" parent="stateMachine"]
 script = ExtResource( 6 )
-[connection signal="body_entered" from="collisionDetector" to="." method="_on_collisionDetector_body_entered"]
 [connection signal="body_entered" from="collisionDetector" to="stateMachine/seek" method="_on_collisionDetector_body_entered"]

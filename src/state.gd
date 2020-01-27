@@ -1,7 +1,7 @@
 extends Node
 class_name state
 
-onready var animation_player = $"../../AnimationPlayer"
+#onready var animation_player = $"../../AnimationPlayer"
 onready var state_machine = get_parent()
 
 func physics_process(delta):
