@@ -92,9 +92,9 @@ func handleInput():
 
 
 func update_camera(delta):
-	if body.position.x > camera.position.x:
+	if body.position.x > camera.position.x+40:
 		camera.position+=Vector2(delta*cameraSpeed,0)
-	else:
+	elif body.position.x < camera.position.x-40:
 		camera.position+=-Vector2(delta*cameraSpeed,0)
 		pass
 
