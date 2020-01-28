@@ -15,7 +15,7 @@ flag_disable_z = true
 flatness = 0.06
 gravity = Vector3( 0, 98, 0 )
 initial_velocity = 30.0
-angular_velocity = 8.40779e-044
+angular_velocity = 8.40779e-44
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 20.0
@@ -74,7 +74,7 @@ tracks/0/keys = {
 "values": [ 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "run_air"
 length = 0.5
 loop = true
@@ -91,7 +91,7 @@ tracks/0/keys = {
 "values": [ 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 28.2932
 height = 25.3766
 
@@ -136,16 +136,16 @@ hframes = 12
 frame = 29
 
 [node name="animationPlayer" type="AnimationPlayer" parent="player_body/sprite"]
-autoplay = "run"
+autoplay = "idle"
 anims/idle = SubResource( 3 )
 anims/power = SubResource( 4 )
 anims/run = SubResource( 5 )
-anims/run_air = SubResource( 7 )
+anims/run_air = SubResource( 6 )
 
 [node name="CollisionDetector" type="Area2D" parent="player_body"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="hud" parent="." instance=ExtResource( 4 )]
 

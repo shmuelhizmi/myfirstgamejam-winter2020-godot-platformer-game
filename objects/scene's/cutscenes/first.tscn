@@ -6,7 +6,7 @@
 [ext_resource path="res://objects/shaders/OverlayShader.shader" type="Shader" id=4]
 [ext_resource path="res://assets/tv.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=6]
-[ext_resource path="res://assets/sound/penguin/Penguin_talk.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/audio/Penguin_action/Penguin_talk.wav" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -64,16 +64,16 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.105882 ), Color( 1, 1, 1, 0.105882 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../AudioStreamPlayer:playing")
+tracks/2/path = NodePath("../audioStreamPlayer:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6, 3, 6.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 1,
-"values": [ true, true, true ]
+"values": [  ]
 }
 
 [node name="first" type="Node"]
@@ -129,7 +129,7 @@ hframes = 12
 autoplay = "fadein"
 anims/fadein = SubResource( 3 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="audioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 [connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
 [connection signal="timeout" from="spawn_letters" to="." method="_on_spawn_letters_timeout"]

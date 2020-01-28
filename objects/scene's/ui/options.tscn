@@ -8,9 +8,8 @@
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
 [ext_resource path="res://objects/ui/theme.res" type="Theme" id=7]
 [ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://assets/sound/Rise06.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/audio/Rise06.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sprites/back.png" type="Texture" id=10]
-
 
 [sub_resource type="Animation" id=1]
 length = 1.5
@@ -115,7 +114,7 @@ emission_shape = 2
 emission_box_extents = Vector3( 500, 0, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 98, 0 )
-angular_velocity = 1.01021e-038
+angular_velocity = 1.01021e-38
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -39.08
