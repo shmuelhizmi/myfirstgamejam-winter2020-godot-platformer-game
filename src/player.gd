@@ -44,7 +44,7 @@ onready var diveAudioStream = preload("res://assets/audio/Penguin_action/Penguin
 onready var walkAudioStream = preload("res://assets/audio/Penguin_action/Penguin_walk.wav")
 onready var jumpAudioStream = preload("res://assets/audio/Penguin_action/Penguin_jump.wav")
 onready var hitAudioStream = preload("res://assets/audio/Penguin_action/Penguin_hit.wav")
-onready var pick_sound = preload("res://assets/audio/pick/collect_item.wav")
+onready var pick_sound = preload("res://assets/audio/Penguin_action/collect_item.wav")
 onready var dead = preload("res://assets/audio/Penguin_action/Penguin_die.wav")
 
 var velocity = Vector2();

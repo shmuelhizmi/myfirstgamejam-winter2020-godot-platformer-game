@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Rise06.wav-789a04a2bd7fa2def8e75da77442a190.sample"
+path="res://.import/Menu_select.wav-c49ef5e49d2170476e312c1d8bfaba57.sample"
 
 [deps]
 
-source_file="res://assets/audio/Rise06.wav"
-dest_files=[ "res://.import/Rise06.wav-789a04a2bd7fa2def8e75da77442a190.sample" ]
+source_file="res://assets/audio/UI/Menu_select.wav"
+dest_files=[ "res://.import/Menu_select.wav-c49ef5e49d2170476e312c1d8bfaba57.sample" ]
 
 [params]
 

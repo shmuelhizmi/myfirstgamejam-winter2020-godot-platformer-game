@@ -61,6 +61,7 @@ func _physics_process(delta):
 
 
 func _on_back_pressed():
+	$back/click.play()
 	$AnimationPlayer.play('fade_out')
 
 
