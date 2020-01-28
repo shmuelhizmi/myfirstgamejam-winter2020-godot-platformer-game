@@ -4,7 +4,7 @@ extends Node
 onready var body : KinematicBody2D = get_node("player_body");
 onready var sprite : Sprite= get_node("player_body/sprite");
 onready var camera : Camera2D = get_node("camera");
-onready var audioStreamPlayer : AudioStreamPlayer2D = get_node("audioStreamPlayer");
+onready var audioStreamPlayer : AudioStreamPlayer2D = get_node("camera/audioStreamPlayer");
 onready var animationPlayer : AnimationPlayer = sprite.get_node("animationPlayer");
 
 #ui
@@ -17,11 +17,13 @@ onready var abilities = {
 
 	#player properties
 #logic properties
+var die : bool = false
 export var lifes = 3;
 export var maximum_lifes = 3;
 var lastCheckpoint;
 # movement properties
 export var speed = 280;
+#warning-ignore:unused_class_variable
 export var runningMultiplier = 1.3;
 export var jumpForce = 500;
 export var gravityScale = 20;
@@ -37,9 +39,13 @@ export var runAnimationName="";
 export var jumpAnimationName="";
 export var crouchAnimationName="";
 
-var jumpAudioStream;
-var slideAudioStream;
-var walkAudioStream;
+#audio
+onready var diveAudioStream = preload("res://assets/audio/Penguin_action/Penguin_dive.wav")
+onready var walkAudioStream = preload("res://assets/audio/Penguin_action/Penguin_walk.wav")
+onready var jumpAudioStream = preload("res://assets/audio/Penguin_action/Penguin_jump.wav")
+onready var hitAudioStream = preload("res://assets/audio/Penguin_action/Penguin_hit.wav")
+onready var pick_sound = preload("res://assets/audio/Penguin_action/collect_item.wav")
+onready var dead = preload("res://assets/audio/Penguin_action/Penguin_die.wav")
 
 var velocity = Vector2();
 var up = Vector2(0, -1);
@@ -57,10 +63,34 @@ func _ready():
 
 
 func _process(delta):
+	velocity.x=0;
 	handleInput()
+	updateAnimation();
 	velocity.y += gravityScale;
 	velocity = body.move_and_slide(velocity, up);
 	update_camera(delta);
+	pass
+
+func updateAnimation():
+	if animationPlayer.current_animation=="power":
+		return
+	if Input.is_action_pressed("player_right") or Input.is_action_pressed("player_left"):
+		if body.is_on_floor():
+			if animationPlayer.current_animation!="run":
+				animationPlayer.current_animation="run";
+				play_sound(walkAudioStream)
+		else:
+			if animationPlayer.current_animation!="run_air":
+				animationPlayer.current_animation="run_air";
+		if velocity.x>0:
+			sprite.flip_h = false; 
+		else:
+			sprite.flip_h =true;
+	else:
+		if animationPlayer.current_animation!="idle":
+			audioStreamPlayer.get_node("walkSoundTimer").stop()
+			sprite.flip_h = not sprite.flip_h;
+			animationPlayer.current_animation="idle"
 	pass
 
 var slideForce = 0;
@@ -118,12 +148,12 @@ func update_camera(delta):
 
 func actionJump(extraVelocity=0):
 	velocity.y = -jumpForce-extraVelocity;
+	play_sound(jumpAudioStream)
 	pass
 
 func actionMove(directin):
 	velocity.x += (speed * directin);
 	pass
-
 
 func _on_CollisionDetector_body_entered(collider):
 	if collider.is_in_group("enemy"):
@@ -142,11 +172,13 @@ func _on_CollisionDetector_area_entered(area):
 		pass
 	if "collectable" in area.name:
 		onCollideCollectable(area.name);
+		play_sound(pick_sound)
 		area.queue_free();
 		pass
 
 
 func onCollideCollectable(collectable):
+	animationPlayer.play("power");
 	if "speed" in collectable:
 		startCollectable(getCollectableTime(collectable),"start_ability_speed","end_ability_speed");
 	pass
@@ -183,7 +215,8 @@ func damage():
 	lifes=lifes-1;
 	drawLifes();
 	if lifes<=0:
-		get_tree().reload_current_scene();
+		get_tree().paused = true
+		play_sound(dead)
 		return true;
 	else:
 		get_parent().call("reset_enemies");
@@ -244,3 +277,21 @@ func end_ability_bunny():
 	jumpForce+=-230;
 	pass
 
+func play_sound(sound):
+	audioStreamPlayer.stream = sound
+	audioStreamPlayer.play()
+	if sound == dead:
+		die = true
+	
+	if sound == walkAudioStream:
+		audioStreamPlayer.get_node("walkSoundTimer").start()
+	else:
+		audioStreamPlayer.get_node("walkSoundTimer").stop()
+
+func _on_walkSoundTimer_timeout():
+	audioStreamPlayer.play()
+
+
+func _on_audioStreamPlayer_finished():
+	if die == true:
+		get_tree().reload_current_scene();

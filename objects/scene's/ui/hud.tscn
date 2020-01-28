@@ -89,4 +89,3 @@ lifetime = 12.0
 explosiveness = 0.27
 process_material = ExtResource( 5 )
 texture = ExtResource( 6 )
-

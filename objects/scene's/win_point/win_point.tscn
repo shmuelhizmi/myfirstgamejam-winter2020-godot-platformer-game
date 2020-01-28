@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://objects/scene's/win_point/win_point.gd" type="Script" id=1]
+[ext_resource path="res://src/win_point.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/win_point/win.png" type="Texture" id=2]
 [ext_resource path="res://assets/icon.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 79.1913, 693.971 )
@@ -53,7 +54,6 @@ pause_mode = 2
 anims/fade_out = SubResource( 2 )
 
 [node name="win_music" type="AudioStreamPlayer" parent="."]
-
 [connection signal="body_entered" from="." to="." method="_on_win_point_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="finished" from="win_music" to="." method="_on_win_music_finished"]

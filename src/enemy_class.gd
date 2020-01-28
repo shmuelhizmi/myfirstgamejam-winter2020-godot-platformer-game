@@ -3,12 +3,18 @@ class_name enemy
 onready var initial_state = self  
  
 export(int) var slideness = 100;
+#warning-ignore:unused_class_variable
 export(int) var speed = 180;
 
+#warning-ignore:unused_class_variable
 var velocity:Vector2 = Vector2()
+#warning-ignore:unused_class_variable
 var up:Vector2 = Vector2(0, -1)
+#warning-ignore:unused_class_variable
 var gravityScale = 1200
+#warning-ignore:unused_class_variable
 onready var raycast1: RayCast2D = $rayCast1
+#warning-ignore:unused_class_variable
 onready var raycast2: RayCast2D = $rayCast2
 
 func _ready():

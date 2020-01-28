@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/options.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=2]
@@ -8,8 +8,9 @@
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
 [ext_resource path="res://objects/ui/theme.res" type="Theme" id=7]
 [ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://assets/music/Rise06.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/audio/UI/Rise06.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sprites/back.png" type="Texture" id=10]
+[ext_resource path="res://assets/audio/UI/Menu_select.wav" type="AudioStream" id=11]
 
 [sub_resource type="Animation" id=1]
 length = 1.5
@@ -114,7 +115,7 @@ emission_shape = 2
 emission_box_extents = Vector3( 500, 0, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 98, 0 )
-angular_velocity = 1.01021e-38
+angular_velocity = 1.01021e-038
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -39.08
@@ -267,7 +268,7 @@ text = "sounds"
 [node name="music_volume" type="AudioStreamPlayer" parent="sounds"]
 stream = ExtResource( 9 )
 volume_db = -10.0
-bus = "music"
+bus = "sounds"
 
 [node name="volume" type="Label" parent="."]
 margin_left = 35.7868
@@ -282,7 +283,6 @@ __meta__ = {
 }
 
 [node name="back" type="Button" parent="."]
-editor/display_folded = true
 margin_left = 914.0
 margin_top = 10.0
 margin_right = 1002.0
@@ -301,6 +301,12 @@ texture = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="click" type="AudioStreamPlayer" parent="back"]
+stream = ExtResource( 11 )
+volume_db = -20.0
+bus = "sounds"
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="value_changed" from="music" to="." method="_on_music_value_changed"]
 [connection signal="value_changed" from="sounds" to="." method="_on_sounds_value_changed"]

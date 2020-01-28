@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/player.gd" type="Script" id=1]
-[ext_resource path="res://assets/penguin.png" type="Texture" id=2]
-[ext_resource path="res://objects/scene's/ui/hud.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/audio/Penguin_action/Penguin_walk.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=3]
+[ext_resource path="res://objects/scene's/ui/hud.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 22.4642
@@ -14,6 +15,7 @@ flag_disable_z = true
 flatness = 0.06
 gravity = Vector3( 0, 98, 0 )
 initial_velocity = 30.0
+angular_velocity = 8.40779e-044
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 20.0
@@ -23,7 +25,73 @@ scale_random = 1.0
 color = Color( 0.0862745, 0.662745, 0.721569, 1 )
 hue_variation = -1.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 2.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7, 1.9, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "power"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 13, 14, 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "run_air"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 13, 14, 15, 16, 17 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 28.2932
 height = 25.3766
 
@@ -37,6 +105,16 @@ current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
+
+[node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="camera"]
+pause_mode = 2
+stream = ExtResource( 2 )
+volume_db = -7.0
+attenuation = 0.0915054
+bus = "sounds"
+
+[node name="walkSoundTimer" type="Timer" parent="camera/audioStreamPlayer"]
+wait_time = 0.2
 
 [node name="player_body" type="KinematicBody2D" parent="."]
 
@@ -52,28 +130,39 @@ randomness = 1.0
 process_material = SubResource( 2 )
 
 [node name="sprite" type="Sprite" parent="player_body"]
-editor/display_folded = true
-scale = Vector2( 0.0447019, 0.0487869 )
-texture = ExtResource( 2 )
+position = Vector2( 0, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+vframes = 3
+hframes = 12
+frame = 29
 
 [node name="animationPlayer" type="AnimationPlayer" parent="player_body/sprite"]
+autoplay = "idle"
+anims/idle = SubResource( 3 )
+anims/power = SubResource( 4 )
+anims/run = SubResource( 5 )
+anims/run_air = SubResource( 6 )
 
 [node name="CollisionDetector" type="Area2D" parent="player_body"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]
-shape = SubResource( 3 )
+shape = SubResource( 7 )
 
-[node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="hud" parent="." instance=ExtResource( 3 )]
+[node name="hud" parent="." instance=ExtResource( 4 )]
 
 [node name="background" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = -1
 
 [node name="TextureRect" type="TextureRect" parent="background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 4 )
+margin_top = 0.630249
+margin_right = 438.0
+margin_bottom = 223.63
+texture = ExtResource( 5 )
+
+[connection signal="finished" from="camera/audioStreamPlayer" to="." method="_on_audioStreamPlayer_finished"]
+[connection signal="timeout" from="camera/audioStreamPlayer/walkSoundTimer" to="." method="_on_walkSoundTimer_timeout"]
 [connection signal="area_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

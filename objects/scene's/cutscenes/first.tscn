@@ -1,0 +1,137 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/first.gd" type="Script" id=1]
+[ext_resource path="res://assets/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/Winter flakes.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://objects/shaders/OverlayShader.shader" type="Shader" id=4]
+[ext_resource path="res://assets/tv.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=6]
+[ext_resource path="res://assets/audio/Penguin_action/Penguin_talk.wav" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/dispAmt = 0.024
+shader_param/dispScale = 0.2
+shader_param/abberationAmt = null
+shader_param/timeLine = null
+shader_param/scanSpeed = null
+shader_param/scanOffset = null
+shader_param/screenCurvature = null
+shader_param/curvatureDistance = null
+shader_param/displace = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 4 )
+shader_param/dispAmt = 0.003
+shader_param/dispScale = 0.2
+shader_param/abberationAmt = 0.0
+shader_param/timeLine = 0.0
+shader_param/scanSpeed = 0.0
+shader_param/scanOffset = 0.0
+shader_param/screenCurvature = 0.0
+shader_param/curvatureDistance = null
+shader_param/displace = ExtResource( 5 )
+
+[sub_resource type="Animation" id=4]
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1022, 640 ), Vector2( 944, 576 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 6.2, 7.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.105882 ), Color( 1, 1, 1, 0.105882 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../audioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[node name="first" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 509.569, 291.765 )
+scale = Vector2( 18.8326, 11.4579 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -1.0
+margin_top = 260.965
+margin_right = 1022.0
+margin_bottom = 369.965
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+align = 1
+clip_text = true
+
+[node name="wait" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="spawn_letters" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="go" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite2" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 954, 544.625 )
+scale = Vector2( 0.300781, 0.219971 )
+texture = ExtResource( 5 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( 514, 291.125 )
+scale = Vector2( 1.16016, 0.715088 )
+texture = ExtResource( 5 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.731765 )
+position = Vector2( 945.114, 576.914 )
+scale = Vector2( 5.16667, 5.16667 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3"]
+autoplay = "fadein"
+anims/fadein = SubResource( 4 )
+
+[node name="audioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "sounds"
+
+[connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
+[connection signal="timeout" from="spawn_letters" to="." method="_on_spawn_letters_timeout"]
+[connection signal="timeout" from="go" to="." method="_on_go_timeout"]

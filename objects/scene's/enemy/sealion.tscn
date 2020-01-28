@@ -8,12 +8,13 @@ radius = 30.8556
 height = 14.7685
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16.0759, 7.21938 )
+extents = Vector2( 27.1179, 4 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 27.4235, 28.7298 )
 
 [node name="sealion" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 1 )
 vulnerableSprite = ExtResource( 2 )
 
@@ -34,19 +35,17 @@ position = Vector2( 29.0562, 0 )
 enabled = true
 
 [node name="rayCast3" type="RayCast2D" parent="."]
-position = Vector2( 0, -35 )
 rotation = 1.57079
 enabled = true
 cast_to = Vector2( 0, 40 )
 
 [node name="rayCast4" type="RayCast2D" parent="."]
-position = Vector2( 0, -35 )
 rotation = -1.57079
 enabled = true
 cast_to = Vector2( 0, 40 )
 
 [node name="vulnerableArea" type="Area2D" parent="."]
-position = Vector2( 0, -45 )
+position = Vector2( 1, -28.534 )
 __meta__ = {
 "_edit_group_": true
 }

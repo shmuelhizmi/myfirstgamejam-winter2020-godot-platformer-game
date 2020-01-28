@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/collect_item.wav-6ea26fb865c40fcf864e6bd9f4fa6961.sample"
+
+[deps]
+
+source_file="res://assets/audio/Penguin_action/collect_item.wav"
+dest_files=[ "res://.import/collect_item.wav-6ea26fb865c40fcf864e6bd9f4fa6961.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
