@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/penguin.png" type="Texture" id=2]
@@ -9,9 +9,22 @@
 radius = 22.4642
 height = 31.4068
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 31.2958
-height = 15.2174
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+flatness = 0.06
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 30.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 20.0
+angle_random = 1.0
+scale = 4.0
+scale_random = 1.0
+color = Color( 0.0862745, 0.662745, 0.721569, 1 )
+hue_variation = -1.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 28.7236
 
 [node name="player" type="Node2D" groups=[
 "hero",
@@ -29,6 +42,14 @@ smoothing_enabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body"]
 shape = SubResource( 1 )
 
+[node name="particles" type="Particles2D" parent="player_body"]
+position = Vector2( 0, 30 )
+rotation = 2.62498
+amount = 14
+speed_scale = 3.0
+randomness = 1.0
+process_material = SubResource( 2 )
+
 [node name="sprite" type="Sprite" parent="player_body"]
 editor/display_folded = true
 scale = Vector2( 0.0447019, 0.0487869 )
@@ -37,10 +58,9 @@ texture = ExtResource( 2 )
 [node name="animationPlayer" type="AnimationPlayer" parent="player_body/sprite"]
 
 [node name="CollisionDetector" type="Area2D" parent="player_body"]
-editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 
@@ -54,6 +74,5 @@ layer = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
-
 [connection signal="area_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
