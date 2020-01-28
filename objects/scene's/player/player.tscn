@@ -23,8 +23,9 @@ scale_random = 1.0
 color = Color( 0.0862745, 0.662745, 0.721569, 1 )
 hue_variation = -1.0
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 28.7236
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 28.2932
+height = 25.3766
 
 [node name="player" type="Node2D" groups=[
 "hero",
