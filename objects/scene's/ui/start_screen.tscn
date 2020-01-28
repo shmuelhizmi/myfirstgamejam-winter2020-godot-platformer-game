@@ -6,8 +6,7 @@
 [ext_resource path="res://assets/icon.png" type="Texture" id=4]
 [ext_resource path="res://objects/particals/ice_cloud.tres" type="Material" id=5]
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
-[ext_resource path="res://main.tres" type="DynamicFont" id=7]
-[ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="Animation" id=1]
 length = 1.5
@@ -98,7 +97,7 @@ emission_shape = 2
 emission_box_extents = Vector3( 500, 0, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 98, 0 )
-angular_velocity = 1.01021e-038
+angular_velocity = 1.01021e-38
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -39.08
@@ -106,15 +105,20 @@ radial_accel = -2.3
 scale = 5.0
 color = Color( 0.635294, 0.972549, 0.733333, 1 )
 
+[sub_resource type="DynamicFont" id=7]
+size = 70
+outline_size = 5
+font_data = ExtResource( 7 )
+
 [sub_resource type="DynamicFont" id=5]
 size = 40
 outline_size = 5
-font_data = ExtResource( 8 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 40
 outline_size = 5
-font_data = ExtResource( 8 )
+font_data = ExtResource( 7 )
 
 [node name="start_screen" type="Control"]
 anchor_right = 1.0
@@ -187,7 +191,7 @@ margin_left = 7.31342
 margin_top = 5.6449
 margin_right = 357.313
 margin_bottom = 75.6449
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
 text = "start"
 align = 1

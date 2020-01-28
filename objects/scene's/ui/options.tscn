@@ -8,8 +8,9 @@
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
 [ext_resource path="res://objects/ui/theme.res" type="Theme" id=7]
 [ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://assets/music/Rise06.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sound/Rise06.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sprites/back.png" type="Texture" id=10]
+
 
 [sub_resource type="Animation" id=1]
 length = 1.5
