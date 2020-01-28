@@ -22,26 +22,29 @@ var gotPushed =false
 func _physics_process(delta):
 	velocity.y += gravityScale * delta
 	velocity.x = 0;
-	if currentState == state.walk:
-		velocity.x = currentDirection * speed
-		velocity += slide()
-		if !raycast1.is_colliding():
-			currentDirection = Direction.R
-		if raycast3.is_colliding() and raycast3.get_collider().name != "player_body":
-			currentDirection = Direction.R
 	
-		# If right hand is a gap or wall, then go left
+	if currentState == state.walk or gotPushed:
 		if !raycast2.is_colliding():
-			currentDirection = Direction.L
-		if raycast4.is_colliding() and raycast4.get_collider().name != "player_body":
-			currentDirection = Direction.L
-	
-		# If left hand is a gap or wall, then go right
-	else:
-		if gotPushed:
-			velocity.x += currentDirection* speed  *3;
-			$sprite.rotate(0.3);
+			currentDirection = Direction.L;
 			pass
+		if raycast4.is_colliding() and raycast4.get_collider().name != "player_body":
+			currentDirection = Direction.L;
+			pass
+		pass
+		if currentState == state.walk:
+			velocity.x = currentDirection * speed
+			velocity += slide()
+			if !raycast1.is_colliding():
+				currentDirection = Direction.R;
+				pass
+			if raycast3.is_colliding() and raycast3.get_collider().name != "player_body":
+				currentDirection = Direction.R;
+				pass
+		else:
+			if gotPushed:
+				velocity.x += currentDirection* speed  *3;
+				$sprite.rotate(0.3);
+				pass
 
 	velocity = move_and_slide(velocity, up)
 
@@ -67,14 +70,32 @@ func _on_vulnerableArea_body_entered(body: PhysicsBody2D):
 			scale= Vector2(0.5,0.5);
 			$sprite.texture = vulnerableSprite;
 		else:
-			gotPushed = true;
-			pass
+			if not gotPushed:
+				push(body);
+			else:
+				body.get_parent().call("damage")
+				pass
 
 func _on_vulnerableArea_area_entered(area):
 	if "DeadZone" in area.name:
 		queue_free();
-	pass
+	if "CollisionDetector" in area.name:
+		if "player" in area.get_parent().name:
+			if not gotPushed:
+				push(area.get_parent())
+			else:
+				area.get_parent().get_parent().call("damage")
+				pass
+		pass
 
+func push(player):
+	if currentState == state.vulnerable :
+		gotPushed=true;
+		if player.position.x>position.x:
+			currentDirection=Direction.L;
+		else:
+			currentDirection=Direction.R;
+	pass
 
 func _on_unvulnerableArea2_body_entered(body: PhysicsBody2D):
 	if body!=null and "player" in body.name.to_lower():
