@@ -19,6 +19,7 @@ onready var raycast3: RayCast2D = $rayCast3
 onready var raycast4: RayCast2D = $rayCast4
 
 var gotPushed =false
+var dangers =false;
 func _physics_process(delta):
 	velocity.y += gravityScale * delta
 	velocity.x = 0;
@@ -73,7 +74,8 @@ func _on_vulnerableArea_body_entered(body: PhysicsBody2D):
 			if not gotPushed:
 				push(body);
 			else:
-				body.get_parent().call("damage")
+				if dangers:
+					body.get_parent().call("damage")
 				pass
 
 func _on_vulnerableArea_area_entered(area):
@@ -84,7 +86,8 @@ func _on_vulnerableArea_area_entered(area):
 			if not gotPushed:
 				push(area.get_parent())
 			else:
-				area.get_parent().get_parent().call("damage")
+				if dangers:
+					area.get_parent().get_parent().call("damage")
 				pass
 		pass
 
@@ -95,6 +98,8 @@ func push(player):
 			currentDirection=Direction.L;
 		else:
 			currentDirection=Direction.R;
+		yield(get_tree().create_timer(2),"timeout")
+		dangers=true;
 	pass
 
 func _on_unvulnerableArea2_body_entered(body: PhysicsBody2D):
@@ -102,6 +107,4 @@ func _on_unvulnerableArea2_body_entered(body: PhysicsBody2D):
 		if currentState == state.walk:
 			body.get_parent().call("damage")
 			pass
-		else:
-			gotPushed = true;
 	pass 

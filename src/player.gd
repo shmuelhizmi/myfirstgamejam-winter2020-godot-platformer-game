@@ -57,10 +57,28 @@ func _ready():
 
 
 func _process(delta):
+	velocity.x=0;
 	handleInput()
+	updateAnimation();
 	velocity.y += gravityScale;
 	velocity = body.move_and_slide(velocity, up);
 	update_camera(delta);
+	pass
+
+func updateAnimation():
+	if animationPlayer.current_animation=="power":
+		return
+	if Input.is_action_pressed("player_right") or Input.is_action_pressed("player_left"):
+		if animationPlayer.current_animation!="run":
+			animationPlayer.current_animation="run";
+		if velocity.x>0:
+			sprite.flip_h = false; 
+		else:
+			sprite.flip_h =true;
+	else:
+		if animationPlayer.current_animation!="idle":
+			sprite.flip_h = not sprite.flip_h;
+			animationPlayer.current_animation="idle"
 	pass
 
 var slideForce = 0;
@@ -147,6 +165,7 @@ func _on_CollisionDetector_area_entered(area):
 
 
 func onCollideCollectable(collectable):
+	animationPlayer.play("power");
 	if "speed" in collectable:
 		startCollectable(getCollectableTime(collectable),"start_ability_speed","end_ability_speed");
 	pass

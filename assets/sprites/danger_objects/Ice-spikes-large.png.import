@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WizardPenguin-Sprite.png-a9793f7d19f53d7ddca4e9381c10c054.stex"
+path="res://.import/Ice-spikes-large.png-08d368e0525cc5d27e21f3cc4f320eb2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Penguin/WizardPenguin-Sprite.png"
-dest_files=[ "res://.import/WizardPenguin-Sprite.png-a9793f7d19f53d7ddca4e9381c10c054.stex" ]
+source_file="res://assets/sprites/danger_objects/Ice-spikes-large.png"
+dest_files=[ "res://.import/Ice-spikes-large.png-08d368e0525cc5d27e21f3cc4f320eb2.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
