@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://objects/scene's/win_point/win_point.gd" type="Script" id=1]
+[ext_resource path="res://src/win_point.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/win_point/win.png" type="Texture" id=2]
 [ext_resource path="res://assets/icon.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 79.1913, 693.971 )

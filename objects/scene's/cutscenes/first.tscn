@@ -12,7 +12,7 @@
 size = 60
 font_data = ExtResource( 3 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
 shader_param/dispAmt = 0.024
 shader_param/dispScale = 0.2
@@ -24,7 +24,7 @@ shader_param/screenCurvature = null
 shader_param/curvatureDistance = null
 shader_param/displace = ExtResource( 5 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 4 )
 shader_param/dispAmt = 0.003
 shader_param/dispScale = 0.2
@@ -36,8 +36,7 @@ shader_param/screenCurvature = 0.0
 shader_param/curvatureDistance = null
 shader_param/displace = ExtResource( 5 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "fadein"
+[sub_resource type="Animation" id=4]
 length = 10.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -106,13 +105,13 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Sprite2" type="Sprite" parent="."]
-material = SubResource( 4 )
+material = SubResource( 2 )
 position = Vector2( 954, 544.625 )
 scale = Vector2( 0.300781, 0.219971 )
 texture = ExtResource( 5 )
 
 [node name="Sprite4" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 3 )
 position = Vector2( 514, 291.125 )
 scale = Vector2( 1.16016, 0.715088 )
 texture = ExtResource( 5 )
@@ -127,10 +126,12 @@ hframes = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3"]
 autoplay = "fadein"
-anims/fadein = SubResource( 3 )
+anims/fadein = SubResource( 4 )
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+bus = "sounds"
+
 [connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
 [connection signal="timeout" from="spawn_letters" to="." method="_on_spawn_letters_timeout"]
 [connection signal="timeout" from="go" to="." method="_on_go_timeout"]

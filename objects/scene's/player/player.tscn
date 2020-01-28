@@ -15,7 +15,7 @@ flag_disable_z = true
 flatness = 0.06
 gravity = Vector3( 0, 98, 0 )
 initial_velocity = 30.0
-angular_velocity = 8.40779e-44
+angular_velocity = 8.40779e-044
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 20.0
@@ -107,7 +107,9 @@ drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="camera"]
+pause_mode = 2
 stream = ExtResource( 2 )
+volume_db = -7.0
 attenuation = 0.0915054
 bus = "sounds"
 
@@ -159,6 +161,8 @@ margin_top = 0.630249
 margin_right = 438.0
 margin_bottom = 223.63
 texture = ExtResource( 5 )
+
+[connection signal="finished" from="camera/audioStreamPlayer" to="." method="_on_audioStreamPlayer_finished"]
 [connection signal="timeout" from="camera/audioStreamPlayer/walkSoundTimer" to="." method="_on_walkSoundTimer_timeout"]
 [connection signal="area_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
