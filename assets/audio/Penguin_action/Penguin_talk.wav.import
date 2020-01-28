@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Penguin_talk.wav-d4f5b5e89d6a5c6ac1a83c2e33c6ae08.sample"
+
+[deps]
+
+source_file="res://assets/audio/Penguin_action/Penguin_talk.wav"
+dest_files=[ "res://.import/Penguin_talk.wav-d4f5b5e89d6a5c6ac1a83c2e33c6ae08.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

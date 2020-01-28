@@ -237,7 +237,6 @@ custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
 text = "EXIT"
 align = 1
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="mouse_entered" from="buttons/start" to="." method="_on_start_mouse_entered"]
 [connection signal="mouse_exited" from="buttons/start" to="." method="_on_start_mouse_exited"]

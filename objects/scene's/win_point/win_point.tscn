@@ -53,7 +53,6 @@ pause_mode = 2
 anims/fade_out = SubResource( 2 )
 
 [node name="win_music" type="AudioStreamPlayer" parent="."]
-
 [connection signal="body_entered" from="." to="." method="_on_win_point_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="finished" from="win_music" to="." method="_on_win_music_finished"]

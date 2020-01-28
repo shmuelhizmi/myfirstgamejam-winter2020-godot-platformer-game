@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/first.gd" type="Script" id=1]
 [ext_resource path="res://assets/icon.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Winter flakes.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/audio/Penguin_action/Penguin_talk.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -37,6 +38,8 @@ wait_time = 0.1
 [node name="go" type="Timer" parent="."]
 one_shot = true
 
+[node name="audioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
 [connection signal="timeout" from="spawn_letters" to="." method="_on_spawn_letters_timeout"]
 [connection signal="timeout" from="go" to="." method="_on_go_timeout"]

@@ -4,7 +4,7 @@ extends Node
 onready var body : KinematicBody2D = get_node("player_body");
 onready var sprite : Sprite= get_node("player_body/sprite");
 onready var camera : Camera2D = get_node("camera");
-onready var audioStreamPlayer : AudioStreamPlayer2D = get_node("audioStreamPlayer");
+onready var audioStreamPlayer : AudioStreamPlayer2D = get_node("camera/audioStreamPlayer");
 onready var animationPlayer : AnimationPlayer = sprite.get_node("animationPlayer");
 
 #ui
@@ -37,9 +37,11 @@ export var runAnimationName="";
 export var jumpAnimationName="";
 export var crouchAnimationName="";
 
-var jumpAudioStream;
-var slideAudioStream;
-var walkAudioStream;
+#audio
+onready var diveAudioStream = preload("res://assets/audio/Penguin_action/Penguin_dive.wav")
+onready var walkAudioStream = preload("res://assets/audio/Penguin_action/Penguin_walk.wav")
+onready var jumpAudioStream = preload("res://assets/audio/Penguin_action/Penguin_jump.wav")
+onready var hitAudioStream = preload("res://assets/audio/Penguin_action/Penguin_hit.wav")
 
 var velocity = Vector2();
 var up = Vector2(0, -1);
@@ -69,14 +71,20 @@ func updateAnimation():
 	if animationPlayer.current_animation=="power":
 		return
 	if Input.is_action_pressed("player_right") or Input.is_action_pressed("player_left"):
-		if animationPlayer.current_animation!="run":
-			animationPlayer.current_animation="run";
+		if body.is_on_floor():
+			if animationPlayer.current_animation!="run":
+				animationPlayer.current_animation="run";
+				play_sound(walkAudioStream)
+		else:
+			if animationPlayer.current_animation!="run_air":
+				animationPlayer.current_animation="run_air";
 		if velocity.x>0:
 			sprite.flip_h = false; 
 		else:
 			sprite.flip_h =true;
 	else:
 		if animationPlayer.current_animation!="idle":
+			audioStreamPlayer.get_node("walkSoundTimer").stop()
 			sprite.flip_h = not sprite.flip_h;
 			animationPlayer.current_animation="idle"
 	pass
@@ -136,12 +144,12 @@ func update_camera(delta):
 
 func actionJump(extraVelocity=0):
 	velocity.y = -jumpForce-extraVelocity;
+	play_sound(jumpAudioStream)
 	pass
 
 func actionMove(directin):
 	velocity.x += (speed * directin);
 	pass
-
 
 func _on_CollisionDetector_body_entered(collider):
 	if collider.is_in_group("enemy"):
@@ -263,3 +271,13 @@ func end_ability_bunny():
 	jumpForce+=-230;
 	pass
 
+func play_sound(sound):
+	audioStreamPlayer.stream = sound
+	audioStreamPlayer.play()
+	if sound == walkAudioStream:
+		audioStreamPlayer.get_node("walkSoundTimer").start()
+	else:
+		audioStreamPlayer.get_node("walkSoundTimer").stop()
+
+func _on_walkSoundTimer_timeout():
+	audioStreamPlayer.play()
