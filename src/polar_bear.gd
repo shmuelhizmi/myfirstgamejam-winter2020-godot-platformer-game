@@ -56,11 +56,11 @@ func _physics_process(delta):
 
 func _on_touch_to_die_body_entered(body):
 	if body.name == "player_body":
-		body.get_parent().damage()
-		$detact/CollisionShape2D.disabled = true
-		$wait.start()
-		attack = false
-		stop_det = false
+		if not body.get_parent().damage():
+			$detact/CollisionShape2D.disabled = true
+			$wait.start()
+			attack = false
+			stop_det = false
 
 
 func _on_detact_body_entered(body):

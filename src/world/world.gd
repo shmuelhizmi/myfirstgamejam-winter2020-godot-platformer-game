@@ -6,5 +6,10 @@ func _ready():
 	get_tree().paused = false
 
 func reset_enemies():
-	$enemies.call("_reset");
+	for i in range(0, enemies.get_child_count()):
+		var enemy = enemies.get_child(i)
+		enemy.queue_free()
+		yield(get_tree().create_timer(0.1), "timeout");
+	var enemies = preload("res://objects/scene's/maps/testArea_enemies.tscn").instance()
+	$enemies.add_child(enemies);
 	pass

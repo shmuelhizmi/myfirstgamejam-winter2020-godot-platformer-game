@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/options.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=2]
@@ -6,9 +6,10 @@
 [ext_resource path="res://assets/icon.png" type="Texture" id=4]
 [ext_resource path="res://objects/particals/ice_cloud.tres" type="Material" id=5]
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
-[ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://assets/music/Rise06.wav" type="AudioStream" id=8]
-[ext_resource path="res://assets/sprites/back.png" type="Texture" id=9]
+[ext_resource path="res://objects/ui/theme.res" type="Theme" id=7]
+[ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/music/Rise06.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sprites/back.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
 length = 1.5
@@ -113,7 +114,7 @@ emission_shape = 2
 emission_box_extents = Vector3( 500, 0, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 98, 0 )
-angular_velocity = 1.01021e-038
+angular_velocity = 1.01021e-38
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -39.08
@@ -124,12 +125,12 @@ color = Color( 0.635294, 0.972549, 0.733333, 1 )
 [sub_resource type="DynamicFont" id=6]
 size = 25
 outline_size = 5
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 70
 outline_size = 5
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [node name="options" type="Control"]
 anchor_right = 1.0
@@ -192,6 +193,7 @@ margin_left = 45.1385
 margin_top = 176.653
 margin_right = 474.139
 margin_bottom = 216.653
+theme = ExtResource( 7 )
 min_value = -50.0
 max_value = 0.0
 step = 10.0
@@ -222,7 +224,7 @@ custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
 text = "music"
 
 [node name="music_volume" type="AudioStreamPlayer" parent="music"]
-stream = ExtResource( 8 )
+stream = ExtResource( 9 )
 volume_db = -10.0
 bus = "music"
 
@@ -232,6 +234,7 @@ margin_left = 45.1385
 margin_top = 285.653
 margin_right = 474.139
 margin_bottom = 325.653
+theme = ExtResource( 7 )
 min_value = -50.0
 max_value = 0.0
 step = 10.0
@@ -262,7 +265,7 @@ custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
 text = "sounds"
 
 [node name="music_volume" type="AudioStreamPlayer" parent="sounds"]
-stream = ExtResource( 8 )
+stream = ExtResource( 9 )
 volume_db = -10.0
 bus = "music"
 
@@ -294,11 +297,10 @@ __meta__ = {
 [node name="back" type="Sprite" parent="back"]
 position = Vector2( 44.001, 46.0002 )
 scale = Vector2( 0.390624, 0.390624 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="value_changed" from="music" to="." method="_on_music_value_changed"]
 [connection signal="value_changed" from="sounds" to="." method="_on_sounds_value_changed"]

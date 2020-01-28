@@ -184,11 +184,11 @@ func damage():
 	drawLifes();
 	if lifes<=0:
 		get_tree().reload_current_scene();
-		pass
+		return true;
 	else:
-		body.position = lastCheckpoint;
 		get_parent().call("reset_enemies");
-		pass	
+		body.position = lastCheckpoint;
+		return true;
 	pass
 
 

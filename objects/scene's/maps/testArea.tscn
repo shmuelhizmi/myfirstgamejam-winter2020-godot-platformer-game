@@ -9,10 +9,10 @@
 [ext_resource path="res://objects/tilemap/water.tres" type="TileSet" id=7]
 [ext_resource path="res://objects/scene's/player/player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/scene's/platforms/jumping_platform.tscn" type="PackedScene" id=9]
-[ext_resource path="res://objects/scene's/maps/testArea_enemies.tscn" type="PackedScene" id=10]
-[ext_resource path="res://objects/shaders/water.shader" type="Shader" id=11]
-[ext_resource path="res://assets/icon.png" type="Texture" id=12]
-[ext_resource path="res://objects/scene's/win_point/win_point.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/shaders/water.shader" type="Shader" id=10]
+[ext_resource path="res://assets/icon.png" type="Texture" id=11]
+[ext_resource path="res://objects/scene's/win_point/win_point.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/scene's/maps/testArea_enemies.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -26,7 +26,7 @@ extents = Vector2( 10, 60 )
 extents = Vector2( 50000, 18.772 )
 
 [sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 11 )
+shader = ExtResource( 10 )
 shader_param/blue_tint = Color( 0.647059, 0.972549, 0.964706, 1 )
 shader_param/sprite_scale = Vector2( 1, 1 )
 shader_param/scale_x = 0.67
@@ -36,6 +36,7 @@ position = Vector2( 19.3447, -0.773773 )
 script = ExtResource( 1 )
 
 [node name="map" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="ColorRect" type="ColorRect" parent="map"]
 visible = false
@@ -333,17 +334,19 @@ shape = SubResource( 4 )
 [node name="jumping_platform2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 4146.31, -21.3996 )
 
-[node name="enemies" parent="." instance=ExtResource( 10 )]
-position = Vector2( 1.46289, 0.0252724 )
-
 [node name="icon" type="Sprite" parent="."]
 material = SubResource( 5 )
 position = Vector2( 3327.93, 79.8023 )
 scale = Vector2( 2.98732, 0.508344 )
-texture = ExtResource( 12 )
+texture = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="win_point" parent="." instance=ExtResource( 13 )]
+[node name="win_point" parent="." instance=ExtResource( 12 )]
 position = Vector2( 5117.94, -81.2311 )
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="enemies" parent="enemies" instance=ExtResource( 13 )]
+position = Vector2( 1.46289, 0.0252724 )
