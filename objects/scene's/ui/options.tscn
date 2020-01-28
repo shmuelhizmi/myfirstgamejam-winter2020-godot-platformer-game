@@ -1,5 +1,305 @@
-[gd_scene format=2]
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/options.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=2]
+[ext_resource path="res://objects/shaders/fog.shader" type="Shader" id=3]
+[ext_resource path="res://assets/icon.png" type="Texture" id=4]
+[ext_resource path="res://objects/particals/ice_cloud.tres" type="Material" id=5]
+[ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/music/Rise06.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sprites/back.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=1]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/fade:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("buttons/start:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("buttons/options:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("buttons/exit:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("buttons:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.1, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 87.064, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_in_options"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/fade:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/fade:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/color = Vector3( 0.1, 0.48, 0.95 )
+shader_param/OCTAVES = 4
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+angular_velocity = 1.01021e-038
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -39.08
+radial_accel = -2.3
+scale = 5.0
+color = Color( 0.635294, 0.972549, 0.733333, 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 25
+outline_size = 5
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 70
+outline_size = 5
+font_data = ExtResource( 7 )
 
 [node name="options" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="background" type="Sprite" parent="."]
+scale = Vector2( 0.700173, 0.732527 )
+texture = ExtResource( 2 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+editor/display_folded = true
+anims/fade_in = SubResource( 1 )
+anims/fade_in_options = SubResource( 2 )
+anims/fade_out = SubResource( 3 )
+
+[node name="fade" type="Sprite" parent="AnimationPlayer"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -47.4863, -28.4889 )
+scale = Vector2( 0.747374, 0.822651 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="fog" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.858824 )
+material = SubResource( 4 )
+position = Vector2( 513.61, 301.768 )
+scale = Vector2( 16.2495, 9.67657 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ice" type="Particles2D" parent="."]
+position = Vector2( -7.38789, -132.189 )
+rotation = 0.523599
+amount = 100
+lifetime = 13.9
+process_material = ExtResource( 5 )
+texture = ExtResource( 6 )
+
+[node name="sparks" type="Particles2D" parent="."]
+position = Vector2( 489.082, 627.907 )
+rotation = 3.14159
+amount = 10
+lifetime = 13.9
+process_material = SubResource( 5 )
+
+[node name="music" type="HSlider" parent="."]
+editor/display_folded = true
+margin_left = 45.1385
+margin_top = 176.653
+margin_right = 474.139
+margin_bottom = 216.653
+min_value = -50.0
+max_value = 0.0
+step = 10.0
+value = -10.0
+tick_count = 5
+ticks_on_borders = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="value" type="Label" parent="music"]
+margin_left = 455.499
+margin_top = 8.53798
+margin_right = 665.499
+margin_bottom = 38.538
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
+text = "80%"
+
+[node name="name" type="Label" parent="music"]
+margin_left = 120.29
+margin_top = -15.7201
+margin_right = 330.29
+margin_bottom = 14.2799
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
+text = "music"
+
+[node name="music_volume" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 8 )
+volume_db = -10.0
+bus = "music"
+
+[node name="sounds" type="HSlider" parent="."]
+editor/display_folded = true
+margin_left = 45.1385
+margin_top = 285.653
+margin_right = 474.139
+margin_bottom = 325.653
+min_value = -50.0
+max_value = 0.0
+step = 10.0
+value = -10.0
+tick_count = 5
+ticks_on_borders = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="value" type="Label" parent="sounds"]
+margin_left = 455.499
+margin_top = 8.53798
+margin_right = 665.499
+margin_bottom = 38.538
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
+text = "80%"
+
+[node name="name" type="Label" parent="sounds"]
+margin_left = 120.29
+margin_top = -15.7201
+margin_right = 330.29
+margin_bottom = 14.2799
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
+text = "sounds"
+
+[node name="music_volume" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource( 8 )
+volume_db = -10.0
+bus = "music"
+
+[node name="volume" type="Label" parent="."]
+margin_left = 35.7868
+margin_top = 26.4192
+margin_right = 525.787
+margin_bottom = 96.4192
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.478431, 0.87451, 0.882353, 1 )
+text = "volume:"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="back" type="Button" parent="."]
+editor/display_folded = true
+margin_left = 914.0
+margin_top = 10.0
+margin_right = 1002.0
+margin_bottom = 102.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="back" type="Sprite" parent="back"]
+position = Vector2( 44.001, 46.0002 )
+scale = Vector2( 0.390624, 0.390624 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="value_changed" from="music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="sounds" to="." method="_on_sounds_value_changed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

@@ -4,6 +4,8 @@ var can_click : bool = false
 var go_to : String = ''
 
 func _ready():
+	print(AudioServer.get_bus_volume_db(AudioServer.get_bus_index('music')))
+	print(AudioServer.get_bus_volume_db(AudioServer.get_bus_index('sounds')))
 	$AnimationPlayer/fade.visible = true
 	$AnimationPlayer/fade.modulate = Color(0, 0, 0, 1)
 	$AnimationPlayer.play("fade_in")
