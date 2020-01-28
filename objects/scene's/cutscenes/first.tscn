@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/first.gd" type="Script" id=1]
+[ext_resource path="res://assets/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/Winter flakes.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 3 )
+
+[node name="first" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 509.569, 291.765 )
+scale = Vector2( 18.8326, 11.4579 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -1.0
+margin_top = 260.965
+margin_right = 1022.0
+margin_bottom = 369.965
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+align = 1
+clip_text = true
+
+[node name="wait" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="spawn_letters" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="go" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
+[connection signal="timeout" from="spawn_letters" to="." method="_on_spawn_letters_timeout"]
+[connection signal="timeout" from="go" to="." method="_on_go_timeout"]

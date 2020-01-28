@@ -40,7 +40,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == 'fade_out':
 		if go_to == 'start':
 #warning-ignore:return_value_discarded
-			get_tree().change_scene("res://objects/scene\'s/maps/testArea.tscn")
+			get_tree().change_scene("res://objects/scene\'s/cutscenes/first.tscn")
 		
 		elif go_to == 'options':
 #warning-ignore:return_value_discarded
