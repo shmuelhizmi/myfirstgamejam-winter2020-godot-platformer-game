@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/sprites/win_point/win.png" type="Texture" id=2]
 [ext_resource path="res://assets/icon.png" type="Texture" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 79.1913, 693.971 )
 
@@ -17,7 +16,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
@@ -43,17 +42,22 @@ position = Vector2( -18.3136, -18.3136 )
 scale = Vector2( 2.18486, 2.18486 )
 texture = ExtResource( 2 )
 
-[node name="icon" type="Sprite" parent="."]
+[node name="win_music" type="AudioStreamPlayer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
+
+[node name="icon" type="Sprite" parent="CanvasLayer"]
 pause_mode = 2
 modulate = Color( 0, 0, 0, 0 )
-scale = Vector2( 87.0593, 87.0593 )
+scale = Vector2( 43.5297, 43.5297 )
+z_index = 100
 texture = ExtResource( 3 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 pause_mode = 2
 anims/fade_out = SubResource( 2 )
 
-[node name="win_music" type="AudioStreamPlayer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_win_point_body_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="finished" from="win_music" to="." method="_on_win_music_finished"]
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

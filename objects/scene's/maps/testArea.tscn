@@ -9,10 +9,10 @@
 [ext_resource path="res://objects/tilemap/water.tres" type="TileSet" id=7]
 [ext_resource path="res://objects/scene's/player/player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/scene's/platforms/jumping_platform.tscn" type="PackedScene" id=9]
-[ext_resource path="res://objects/shaders/water.shader" type="Shader" id=10]
-[ext_resource path="res://assets/icon.png" type="Texture" id=11]
-[ext_resource path="res://objects/scene's/win_point/win_point.tscn" type="PackedScene" id=12]
-[ext_resource path="res://objects/scene's/maps/testArea_enemies.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/scene's/win_point/win_point.tscn" type="PackedScene" id=10]
+[ext_resource path="res://objects/scene's/maps/testArea_enemies.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/shaders/water.shader" type="Shader" id=12]
+[ext_resource path="res://assets/icon.png" type="Texture" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -26,7 +26,7 @@ extents = Vector2( 10, 60 )
 extents = Vector2( 50000, 18.772 )
 
 [sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 10 )
+shader = ExtResource( 12 )
 shader_param/blue_tint = Color( 0.647059, 0.972549, 0.964706, 1 )
 shader_param/sprite_scale = Vector2( 1, 1 )
 shader_param/scale_x = 0.67
@@ -36,7 +36,6 @@ position = Vector2( 19.3447, -0.773773 )
 script = ExtResource( 1 )
 
 [node name="map" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="ColorRect" type="ColorRect" parent="map"]
 visible = false
@@ -66,7 +65,10 @@ text = "checkpoint"
 
 [node name="checkpoint3" type="Area2D" parent="map"]
 editor/display_folded = true
-position = Vector2( 2570.14, -3.4099 )
+position = Vector2( 2653.31, -120.013 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/checkpoint3"]
 scale = Vector2( 5, 5 )
@@ -140,8 +142,7 @@ text = "ice"
 texture = ExtResource( 3 )
 
 [node name="collectable-bunny-_time_10_time;" type="Area2D" parent="map"]
-editor/display_folded = true
-position = Vector2( 2570.24, -2.40815 )
+position = Vector2( 2652.55, -118.154 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -322,6 +323,7 @@ format = 1
 tile_data = PoolIntArray( 131173, 4, 0, 131174, 4, 1, 131175, 4, 1, 131176, 4, 1, 131177, 4, 0, 131178, 4, 2, 196709, 5, 0, 196710, 5, 0, 196711, 5, 0, 196712, 5, 0, 196713, 5, 0, 196714, 5, 0, 262245, 5, 65536, 262246, 5, 65536, 262247, 5, 65536, 262248, 5, 65536, 262249, 5, 65536, 262250, 5, 65536, 327781, 5, 65536, 327782, 5, 65536, 327783, 5, 65536, 327784, 5, 65536, 327785, 5, 65536, 327786, 5, 65536, 393317, 5, 65536, 393318, 5, 65536, 393319, 5, 65536, 393320, 5, 65536, 393321, 5, 65536, 393322, 5, 65536 )
 
 [node name="player" parent="." instance=ExtResource( 8 )]
+z_index = 0
 
 [node name="DeadZone" type="Area2D" parent="."]
 editor/display_folded = true
@@ -334,17 +336,18 @@ shape = SubResource( 4 )
 [node name="jumping_platform2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 4146.31, -21.3996 )
 
+[node name="win_point" parent="." instance=ExtResource( 10 )]
+position = Vector2( 5117.94, -81.2311 )
+
+[node name="enemies" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="enemies" parent="enemies" instance=ExtResource( 11 )]
+position = Vector2( 1.46289, 0.0252724 )
+
 [node name="water" type="Sprite" parent="."]
 material = SubResource( 5 )
 position = Vector2( 3327.93, 78.6927 )
 scale = Vector2( 2.98732, 0.543018 )
-texture = ExtResource( 11 )
-
-[node name="win_point" parent="." instance=ExtResource( 12 )]
-position = Vector2( 5117.94, -81.2311 )
-
-[node name="enemies" type="Node2D" parent="."]
-
-[node name="enemies" parent="enemies" instance=ExtResource( 13 )]
-position = Vector2( 1.46289, 0.0252724 )
+texture = ExtResource( 13 )
 

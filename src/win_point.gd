@@ -7,7 +7,7 @@ func _on_win_point_body_entered(body):
 	if body.name == "player_body":
 		get_tree().paused = true
 		#$win_music.play()
-		$AnimationPlayer.play("fade_out")
+		$CanvasLayer/AnimationPlayer.play("fade_out")
 
 
 #func _on_win_music_finished():
