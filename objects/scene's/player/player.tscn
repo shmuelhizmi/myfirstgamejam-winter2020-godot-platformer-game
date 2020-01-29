@@ -169,7 +169,7 @@ position = Vector2( 32.722, -8.01104 )
 [node name="hud" parent="." instance=ExtResource( 4 )]
 
 [node name="attack" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.6
 one_shot = true
 
 [connection signal="finished" from="camera/audioStreamPlayer" to="." method="_on_audioStreamPlayer_finished"]

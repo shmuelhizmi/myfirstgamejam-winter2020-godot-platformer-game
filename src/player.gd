@@ -32,7 +32,6 @@ export var slidenessAccumulation = 0.3;
 
 #attack:
 var can_attack : bool = true
-var time_to_attack : int = 0.6
 var attacking : bool = false
 
 
@@ -67,8 +66,6 @@ var ice = false;
 enum Direction {L=-1, R=1}
 
 #warning-ignore:unused_argument
-func _physics_process(delta):
-	$attack.wait_time = time_to_attack
 
 func _ready():
 	drawLifes();

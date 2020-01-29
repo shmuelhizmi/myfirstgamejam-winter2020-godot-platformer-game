@@ -351,3 +351,5 @@ position = Vector2( 3327.93, 78.6927 )
 scale = Vector2( 2.98732, 0.543018 )
 texture = ExtResource( 13 )
 
+[node name="splash" type="AudioStreamPlayer2D" parent="water"]
+
