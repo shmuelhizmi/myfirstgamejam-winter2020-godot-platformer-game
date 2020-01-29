@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/first.gd" type="Script" id=1]
 [ext_resource path="res://assets/icon.png" type="Texture" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/tv.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/polar_bear/371942-polar-bear-pixel-art.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=7]
-[ext_resource path="res://assets/audio/Penguin_action/Penguin_talk.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -37,14 +36,8 @@ shader_param/screenCurvature = 0.0
 shader_param/curvatureDistance = null
 shader_param/displace = ExtResource( 5 )
 
-<<<<<<< Updated upstream
 [sub_resource type="Animation" id=4]
 length = 10.0
-=======
-[sub_resource type="Animation" id=3]
-resource_name = "fadein"
-length = 15.0
->>>>>>> Stashed changes
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -152,13 +145,7 @@ autoplay = "fadein"
 anims/fadein = SubResource( 4 )
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="."]
-<<<<<<< Updated upstream
-stream = ExtResource( 7 )
 bus = "sounds"
-
-=======
-stream = ExtResource( 8 )
->>>>>>> Stashed changes
 [connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
 [connection signal="timeout" from="spawn_letters" to="." method="_on_spawn_letters_timeout"]
 [connection signal="timeout" from="go" to="." method="_on_go_timeout"]
