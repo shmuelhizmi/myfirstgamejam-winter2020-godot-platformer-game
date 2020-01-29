@@ -99,6 +99,9 @@ height = 25.3766
 ]]
 z_index = 4
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="camera" type="Camera2D" parent="."]
 current = true
@@ -117,7 +120,6 @@ bus = "sounds"
 wait_time = 0.2
 
 [node name="player_body" type="KinematicBody2D" parent="."]
-editor/display_folded = true
 
 [node name="particles" type="Particles2D" parent="player_body"]
 position = Vector2( 0, 30 )
@@ -131,12 +133,16 @@ process_material = SubResource( 2 )
 shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="player_body"]
+editor/display_folded = true
 position = Vector2( 0, 8 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 12
 frame = 29
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="animationPlayer" type="AnimationPlayer" parent="player_body/sprite"]
 autoplay = "idle"
@@ -146,13 +152,28 @@ anims/run = SubResource( 5 )
 anims/run_air = SubResource( 6 )
 
 [node name="CollisionDetector" type="Area2D" parent="player_body"]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]
 shape = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D" type="Position2D" parent="player_body"]
+position = Vector2( 32.722, -8.01104 )
 
 [node name="hud" parent="." instance=ExtResource( 4 )]
+
+[node name="attack" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="finished" from="camera/audioStreamPlayer" to="." method="_on_audioStreamPlayer_finished"]
 [connection signal="timeout" from="camera/audioStreamPlayer/walkSoundTimer" to="." method="_on_walkSoundTimer_timeout"]
 [connection signal="area_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]

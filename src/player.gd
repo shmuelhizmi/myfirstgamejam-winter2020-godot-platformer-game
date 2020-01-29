@@ -30,6 +30,11 @@ export var gravityScale = 20;
 export var slideness = 450;
 export var slidenessAccumulation = 0.3;
 
+#attack:
+var can_attack : bool = true
+var time_to_attack : int = 0.6
+var attacking : bool = false
+
 
 #player animations
 export var idleAnimationName="";
@@ -39,22 +44,31 @@ export var runAnimationName="";
 export var jumpAnimationName="";
 export var crouchAnimationName="";
 
+#preloads:
+var range_attack = preload("res://objects/scene\'s/spell and attacks/range_attack.tscn")
+
 #audio
+#warning-ignore:unused_class_variable
 onready var diveAudioStream = preload("res://assets/audio/Penguin_action/Penguin_dive.wav")
 onready var walkAudioStream = preload("res://assets/audio/Penguin_action/Penguin_walk.wav")
 onready var jumpAudioStream = preload("res://assets/audio/Penguin_action/Penguin_jump.wav")
+#warning-ignore:unused_class_variable
 onready var hitAudioStream = preload("res://assets/audio/Penguin_action/Penguin_hit.wav")
 onready var pick_sound = preload("res://assets/audio/Penguin_action/collect_item.wav")
 onready var dead = preload("res://assets/audio/Penguin_action/Penguin_die.wav")
 
 var velocity = Vector2();
 var up = Vector2(0, -1);
+#warning-ignore:unused_class_variable
 var currentAction = "idle";
 
 var ice = false;
 
 enum Direction {L=-1, R=1}
 
+#warning-ignore:unused_argument
+func _physics_process(delta):
+	$attack.wait_time = time_to_attack
 
 func _ready():
 	drawLifes();
@@ -114,6 +128,7 @@ func handleInput():
 	var jumpDown = Input.is_action_pressed("player_jump");
 	var rightDown = Input.is_action_pressed("player_right");
 	var leftDown = Input.is_action_pressed("player_left");
+	var attackdown = Input.is_action_pressed('player_attack');
 	var slidenessAccumulationStep = slideForce*(slidenessAccumulation);
 	slideForce+= -slidenessAccumulationStep/5;
 	velocity.x = 0;
@@ -126,12 +141,32 @@ func handleInput():
 				pass
 			pass
 		if rightDown:
+			if sign($player_body/Position2D.position.x) == -1:
+				$player_body/Position2D.position.x = $player_body/Position2D.position.x * -1
 			actionMove(Direction.R);
 			pass
 		if leftDown:
+			if sign($player_body/Position2D.position.x) == 1:
+				$player_body/Position2D.position.x = $player_body/Position2D.position.x * -1
 			actionMove(Direction.L);
 			pass
 		pass
+		
+		if attackdown:
+			if can_attack == true:
+				can_attack = false
+				$attack.start()
+				var attack_p = range_attack.instance()
+				get_parent().add_child(attack_p)
+				attack_p.global_position = $player_body/Position2D.global_position
+				if sign($player_body/Position2D.position.x) == 1:
+					attack_p.dir(1)
+				elif sign($player_body/Position2D.position.x) == -1:
+					attack_p.dir(-1)
+				#attacking = true
+				
+			
+		
 		if ice:
 			velocity += slide()*0.3;
 			pass
@@ -295,3 +330,7 @@ func _on_walkSoundTimer_timeout():
 func _on_audioStreamPlayer_finished():
 	if die == true:
 		get_tree().reload_current_scene();
+
+
+func _on_attack_timeout():
+	can_attack = true
