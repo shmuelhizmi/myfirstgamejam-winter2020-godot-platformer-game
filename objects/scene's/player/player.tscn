@@ -2,8 +2,8 @@
 
 [ext_resource path="res://src/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/Penguin_action/Penguin_walk.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=3]
-[ext_resource path="res://objects/scene's/ui/hud.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=4]
+[ext_resource path="res://objects/scene's/ui/hud.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
@@ -21,11 +21,10 @@ color = Color( 0.0862745, 0.662745, 0.721569, 1 )
 hue_variation = -1.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 22.4642
-height = 31.4068
+radius = 15.0
+height = 26.0
 
 [sub_resource type="Animation" id=3]
-resource_name = "idle"
 length = 2.2
 loop = true
 tracks/0/type = "value"
@@ -42,7 +41,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "power"
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -74,7 +72,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-resource_name = "run_air"
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -91,8 +88,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=7]
-radius = 28.2932
-height = 25.3766
+radius = 30.0
 
 [node name="player" type="Node2D" groups=[
 "hero",
@@ -105,8 +101,6 @@ __meta__ = {
 
 [node name="camera" type="Camera2D" parent="."]
 current = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="camera"]
@@ -130,13 +124,13 @@ randomness = 1.0
 process_material = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body"]
+position = Vector2( -1, 10 )
 shape = SubResource( 2 )
 
 [node name="sprite" type="Sprite" parent="player_body"]
-editor/display_folded = true
 position = Vector2( 0, 8 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 vframes = 3
 hframes = 12
 frame = 29
@@ -152,10 +146,7 @@ anims/run = SubResource( 5 )
 anims/run_air = SubResource( 6 )
 
 [node name="CollisionDetector" type="Area2D" parent="player_body"]
-editor/display_folded = true
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( -1, 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]
 shape = SubResource( 7 )
@@ -166,7 +157,7 @@ __meta__ = {
 [node name="Position2D" type="Position2D" parent="player_body"]
 position = Vector2( 32.722, -8.01104 )
 
-[node name="hud" parent="." instance=ExtResource( 4 )]
+[node name="hud" parent="." instance=ExtResource( 5 )]
 
 [node name="attack" type="Timer" parent="."]
 wait_time = 0.6

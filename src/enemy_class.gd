@@ -1,6 +1,6 @@
 extends KinematicBody2D
 class_name enemy
-onready var initial_state = self  
+onready var initial_state = self;
  
 export(int) var slideness = 100;
 #warning-ignore:unused_class_variable
@@ -34,4 +34,4 @@ func slide():
 
 func reset():
 	print("RESET")
-	self = initial_state
+	#self = initial_state

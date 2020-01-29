@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/ui/theme.res" type="Theme" id=1]
 [ext_resource path="res://assets/sprites/ability_1.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://objects/particals/snow.res" type="Material" id=5]
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
 [ext_resource path="res://assets/images/Landscape 1.png" type="Texture" id=7]
+
+[sub_resource type="ShaderMaterial" id=1]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -103,6 +105,7 @@ texture = ExtResource( 6 )
 
 [node name="background" type="Sprite" parent="ParallaxBackground"]
 show_behind_parent = true
+material = SubResource( 1 )
 scale = Vector2( 0.516337, 0.405202 )
 z_index = -1
 texture = ExtResource( 7 )

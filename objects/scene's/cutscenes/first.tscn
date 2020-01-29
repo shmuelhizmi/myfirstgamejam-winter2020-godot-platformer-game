@@ -76,13 +76,13 @@ tracks/2/keys = {
 "values": [ false, true, true, true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Sprite5:position")
+tracks/3/path = NodePath("../bear:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 9.8, 10.3 ),
+"times": PoolRealArray( 0, 8.7, 9.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( -304, 320 ), Vector2( -304, 320 ), Vector2( 1392, 304 ) ]
@@ -93,7 +93,7 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 509.569, 291.765 )
+position = Vector2( 510, 292 )
 scale = Vector2( 18.8326, 11.4579 )
 texture = ExtResource( 2 )
 
@@ -106,6 +106,9 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
 clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="wait" type="Timer" parent="."]
 wait_time = 1.5
@@ -117,26 +120,26 @@ wait_time = 0.1
 [node name="go" type="Timer" parent="."]
 one_shot = true
 
-[node name="Sprite2" type="Sprite" parent="."]
+[node name="player" type="Sprite" parent="."]
 material = SubResource( 2 )
 position = Vector2( 954, 544.625 )
 scale = Vector2( 0.300781, 0.219971 )
 texture = ExtResource( 5 )
 
-[node name="Sprite4" type="Sprite" parent="."]
+[node name="shader" type="Sprite" parent="."]
 material = SubResource( 3 )
 position = Vector2( 514, 291.125 )
 scale = Vector2( 1.16016, 0.715088 )
 texture = ExtResource( 5 )
 
-[node name="Sprite5" type="Sprite" parent="."]
+[node name="bear" type="Sprite" parent="."]
 position = Vector2( -304, 320 )
 scale = Vector2( 1.204, 1.236 )
 texture = ExtResource( 6 )
 
 [node name="Sprite3" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.105882 )
-position = Vector2( 1007.51, 628.114 )
+position = Vector2( 1022, 640 )
 scale = Vector2( 5.16667, 5.16667 )
 texture = ExtResource( 7 )
 vframes = 3
