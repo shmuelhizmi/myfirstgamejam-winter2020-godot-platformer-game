@@ -109,14 +109,14 @@ drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
 
-[node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="camera"]
+[node name="click" type="AudioStreamPlayer2D" parent="camera"]
 pause_mode = 2
 stream = ExtResource( 2 )
 volume_db = -7.0
 attenuation = 0.0915054
 bus = "sounds"
 
-[node name="walkSoundTimer" type="Timer" parent="camera/audioStreamPlayer"]
+[node name="walkSoundTimer" type="Timer" parent="camera/click"]
 wait_time = 0.2
 
 [node name="player_body" type="KinematicBody2D" parent="."]
@@ -171,8 +171,8 @@ position = Vector2( 32.722, -8.01104 )
 [node name="attack" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
-[connection signal="finished" from="camera/audioStreamPlayer" to="." method="_on_audioStreamPlayer_finished"]
-[connection signal="timeout" from="camera/audioStreamPlayer/walkSoundTimer" to="." method="_on_walkSoundTimer_timeout"]
+[connection signal="finished" from="camera/click" to="." method="_on_audioStreamPlayer_finished"]
+[connection signal="timeout" from="camera/click/walkSoundTimer" to="." method="_on_walkSoundTimer_timeout"]
 [connection signal="area_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
