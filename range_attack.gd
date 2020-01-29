@@ -7,6 +7,7 @@ var dir : int = 1
 func _physics_process(delta):
 	motion.x = speed * dir * delta
 	translate(motion)
+	$Sprite.rotate(0.3)
 
 func dir(way):
 	dir = way
