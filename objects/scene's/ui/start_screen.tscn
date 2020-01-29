@@ -247,7 +247,6 @@ align = 1
 stream = ExtResource( 8 )
 volume_db = -20.0
 bus = "sounds"
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="mouse_entered" from="buttons/start" to="." method="_on_start_mouse_entered"]
 [connection signal="mouse_exited" from="buttons/start" to="." method="_on_start_mouse_exited"]
