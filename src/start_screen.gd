@@ -19,21 +19,21 @@ func _ready():
 
 func _on_start_pressed():
 	if can_click == true:
-		$click.play()
+		$AnimationPlayer.play()
 		can_click = false
 		go_to = 'start'
 		$AnimationPlayer.play("fade_out")
 
 func _on_options_pressed():
 	if can_click == true:
-		$click.play()
+		$AnimationPlayer.play()
 		can_click = false
 		go_to = 'options'
 		$AnimationPlayer.play("fade_out")
 
 func _on_exit_pressed():
 	if can_click == true:
-		$click.play()
+		$AnimationPlayer.play()
 		can_click = false
 		go_to = 'exit'
 		$AnimationPlayer.play("fade_out")

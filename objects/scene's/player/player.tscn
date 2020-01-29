@@ -1,14 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/Penguin_action/Penguin_walk.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=3]
 [ext_resource path="res://objects/scene's/ui/hud.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/images/background_blur.jpg" type="Texture" id=5]
-
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 22.4642
-height = 31.4068
 
 [sub_resource type="ParticlesMaterial" id=2]
 flag_disable_z = true
@@ -24,6 +19,10 @@ scale = 4.0
 scale_random = 1.0
 color = Color( 0.0862745, 0.662745, 0.721569, 1 )
 hue_variation = -1.0
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 22.4642
+height = 31.4068
 
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
@@ -98,7 +97,11 @@ height = 25.3766
 [node name="player" type="Node2D" groups=[
 "hero",
 ]]
+z_index = 4
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="camera" type="Camera2D" parent="."]
 current = true
@@ -107,7 +110,9 @@ drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="camera"]
+pause_mode = 2
 stream = ExtResource( 2 )
+volume_db = -7.0
 attenuation = 0.0915054
 bus = "sounds"
 
@@ -115,9 +120,6 @@ bus = "sounds"
 wait_time = 0.2
 
 [node name="player_body" type="KinematicBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player_body"]
-shape = SubResource( 1 )
 
 [node name="particles" type="Particles2D" parent="player_body"]
 position = Vector2( 0, 30 )
@@ -127,13 +129,20 @@ speed_scale = 3.0
 randomness = 1.0
 process_material = SubResource( 2 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_body"]
+shape = SubResource( 1 )
+
 [node name="sprite" type="Sprite" parent="player_body"]
+editor/display_folded = true
 position = Vector2( 0, 8 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 12
 frame = 29
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="animationPlayer" type="AnimationPlayer" parent="player_body/sprite"]
 autoplay = "idle"
@@ -143,22 +152,27 @@ anims/run = SubResource( 5 )
 anims/run_air = SubResource( 6 )
 
 [node name="CollisionDetector" type="Area2D" parent="player_body"]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]
 shape = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D" type="Position2D" parent="player_body"]
+position = Vector2( 32.722, -8.01104 )
 
 [node name="hud" parent="." instance=ExtResource( 4 )]
 
-[node name="background" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="TextureRect" type="TextureRect" parent="background"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 0.630249
-margin_right = 438.0
-margin_bottom = 223.63
-texture = ExtResource( 5 )
+[node name="attack" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+[connection signal="finished" from="camera/audioStreamPlayer" to="." method="_on_audioStreamPlayer_finished"]
 [connection signal="timeout" from="camera/audioStreamPlayer/walkSoundTimer" to="." method="_on_walkSoundTimer_timeout"]
 [connection signal="area_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]

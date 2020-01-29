@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/first.gd" type="Script" id=1]
 [ext_resource path="res://assets/icon.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/tv.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/polar_bear/371942-polar-bear-pixel-art.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=7]
+[ext_resource path="res://assets/audio/Penguin_action/Penguin_talk.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -67,12 +68,12 @@ tracks/2/path = NodePath("../audioStreamPlayer:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0, 1, 3.1, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [  ]
+"values": [ false, true, true, true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../Sprite5:position")
@@ -129,12 +130,13 @@ scale = Vector2( 1.16016, 0.715088 )
 texture = ExtResource( 5 )
 
 [node name="Sprite5" type="Sprite" parent="."]
-position = Vector2( 1392, 304 )
+position = Vector2( -304, 320 )
 scale = Vector2( 1.204, 1.236 )
 texture = ExtResource( 6 )
 
 [node name="Sprite3" type="Sprite" parent="."]
-position = Vector2( 944, 576 )
+modulate = Color( 1, 1, 1, 0.105882 )
+position = Vector2( 1007.51, 628.114 )
 scale = Vector2( 5.16667, 5.16667 )
 texture = ExtResource( 7 )
 vframes = 3
@@ -145,6 +147,7 @@ autoplay = "fadein"
 anims/fadein = SubResource( 4 )
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 bus = "sounds"
 [connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
 [connection signal="timeout" from="spawn_letters" to="." method="_on_spawn_letters_timeout"]

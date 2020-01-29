@@ -34,4 +34,4 @@ func _on_wait_timeout():
 
 func _on_go_timeout():
 #warning-ignore:return_value_discarded
-	get_tree().change_scene("res://objects/scene\'s/maps/testArea.tscn")
+	get_tree().change_scene("res://objects/scene\'s/maps/level1/level1.tscn")
