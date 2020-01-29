@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/world/world.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/ability_1.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://objects/scene's/maps/testArea_enemies.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/shaders/water.shader" type="Shader" id=12]
 [ext_resource path="res://assets/icon.png" type="Texture" id=13]
+[ext_resource path="res://src/water.gd" type="Script" id=14]
+[ext_resource path="res://assets/audio/Penguin_action/Penguin_dive.wav" type="AudioStream" id=15]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -30,6 +32,9 @@ shader = ExtResource( 12 )
 shader_param/blue_tint = Color( 0.647059, 0.972549, 0.964706, 1 )
 shader_param/sprite_scale = Vector2( 1, 1 )
 shader_param/scale_x = 0.67
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 32.0787, 30.1426 )
 
 [node name="world" type="Node2D"]
 position = Vector2( 19.3447, -0.773773 )
@@ -350,6 +355,17 @@ material = SubResource( 5 )
 position = Vector2( 3327.93, 78.6927 )
 scale = Vector2( 2.98732, 0.543018 )
 texture = ExtResource( 13 )
+script = ExtResource( 14 )
 
 [node name="splash" type="AudioStreamPlayer2D" parent="water"]
+stream = ExtResource( 15 )
+volume_db = -20.0
 
+[node name="s" type="Area2D" parent="water"]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="water/s"]
+position = Vector2( 0.0755145, 2.0804 )
+shape = SubResource( 6 )
+
+[connection signal="body_entered" from="water/s" to="water" method="_on_s_body_entered"]
