@@ -80,7 +80,6 @@ texture = ExtResource( 4 )
 [node name="snow" type="Node2D" parent="."]
 show_behind_parent = true
 position = Vector2( -51.6943, 73.5997 )
-scale = Vector2( 1, 1 )
 z_index = 1
 
 [node name="Particles2D" type="Particles2D" parent="snow"]
@@ -111,4 +110,3 @@ centered = false
 __meta__ = {
 "_edit_lock_": true
 }
-

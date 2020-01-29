@@ -115,7 +115,7 @@ emission_shape = 2
 emission_box_extents = Vector3( 500, 0, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 98, 0 )
-angular_velocity = 1.01021e-038
+angular_velocity = 1.01021e-38
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -39.08
@@ -150,7 +150,6 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-editor/display_folded = true
 anims/fade_in = SubResource( 1 )
 anims/fade_in_options = SubResource( 2 )
 anims/fade_out = SubResource( 3 )
@@ -306,7 +305,6 @@ __meta__ = {
 stream = ExtResource( 11 )
 volume_db = -20.0
 bus = "sounds"
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="value_changed" from="music" to="." method="_on_music_value_changed"]
 [connection signal="value_changed" from="sounds" to="." method="_on_sounds_value_changed"]
