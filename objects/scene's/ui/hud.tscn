@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/ui/theme.res" type="Theme" id=1]
 [ext_resource path="res://assets/sprites/ability_1.png" type="Texture" id=2]
@@ -6,12 +6,16 @@
 [ext_resource path="res://assets/sprites/ability_3.png" type="Texture" id=4]
 [ext_resource path="res://objects/particals/snow.res" type="Material" id=5]
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/Landscape 1.png" type="Texture" id=7]
 
 [node name="hud" type="CanvasLayer"]
 
 [node name="container" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Top" type="Control" parent="container"]
 anchor_right = 1.0
@@ -74,18 +78,37 @@ margin_bottom = 16.7547
 texture = ExtResource( 4 )
 
 [node name="snow" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2( -51.6943, 73.5997 )
+scale = Vector2( 1, 1 )
+z_index = 1
 
 [node name="Particles2D" type="Particles2D" parent="snow"]
-position = Vector2( 788.488, 102.406 )
+show_behind_parent = true
+position = Vector2( 788.488, 92.3468 )
 amount = 10
 lifetime = 5.0
 process_material = ExtResource( 5 )
 texture = ExtResource( 6 )
 
 [node name="Particles2D2" type="Particles2D" parent="snow"]
-position = Vector2( 302.565, 99.8218 )
+show_behind_parent = true
+position = Vector2( 302.565, 107.216 )
 amount = 14
 lifetime = 12.0
 explosiveness = 0.27
 process_material = ExtResource( 5 )
 texture = ExtResource( 6 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="background" type="Sprite" parent="ParallaxBackground"]
+show_behind_parent = true
+scale = Vector2( 0.516337, 0.405202 )
+z_index = -1
+texture = ExtResource( 7 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
