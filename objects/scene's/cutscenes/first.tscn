@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/first.gd" type="Script" id=1]
 [ext_resource path="res://assets/icon.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Winter flakes.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://objects/shaders/OverlayShader.shader" type="Shader" id=4]
 [ext_resource path="res://assets/tv.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=6]
-[ext_resource path="res://assets/audio/Penguin_action/Penguin_talk.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sprites/polar_bear/371942-polar-bear-pixel-art.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=7]
+[ext_resource path="res://assets/audio/Penguin_action/Penguin_talk.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -36,8 +37,14 @@ shader_param/screenCurvature = 0.0
 shader_param/curvatureDistance = null
 shader_param/displace = ExtResource( 5 )
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=4]
 length = 10.0
+=======
+[sub_resource type="Animation" id=3]
+resource_name = "fadein"
+length = 15.0
+>>>>>>> Stashed changes
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -73,6 +80,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray(  ),
 "update": 1,
 "values": [  ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Sprite5:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 9.8, 10.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -304, 320 ), Vector2( -304, 320 ), Vector2( 1392, 304 ) ]
 }
 
 [node name="first" type="Node"]
@@ -116,11 +135,15 @@ position = Vector2( 514, 291.125 )
 scale = Vector2( 1.16016, 0.715088 )
 texture = ExtResource( 5 )
 
-[node name="Sprite3" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.731765 )
-position = Vector2( 945.114, 576.914 )
-scale = Vector2( 5.16667, 5.16667 )
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 1392, 304 )
+scale = Vector2( 1.204, 1.236 )
 texture = ExtResource( 6 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 944, 576 )
+scale = Vector2( 5.16667, 5.16667 )
+texture = ExtResource( 7 )
 vframes = 3
 hframes = 12
 
@@ -129,9 +152,13 @@ autoplay = "fadein"
 anims/fadein = SubResource( 4 )
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="."]
+<<<<<<< Updated upstream
 stream = ExtResource( 7 )
 bus = "sounds"
 
+=======
+stream = ExtResource( 8 )
+>>>>>>> Stashed changes
 [connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
 [connection signal="timeout" from="spawn_letters" to="." method="_on_spawn_letters_timeout"]
 [connection signal="timeout" from="go" to="." method="_on_go_timeout"]

@@ -13,10 +13,10 @@
 position = Vector2( 205.634, 111.969 )
 
 [node name="spike2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 227.855, 112.006 )
+position = Vector2( 232.256, 112.006 )
 
 [node name="spike3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 248.875, 112.006 )
+position = Vector2( 261.639, 112.446 )
 
 [node name="polar_bear" parent="." instance=ExtResource( 2 )]
 position = Vector2( -212.78, 73.9633 )

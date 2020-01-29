@@ -1,5 +1,5 @@
 extends Node2D
-
+export var enemiesScene:PackedScene;
 onready var enemies = $enemies
 
 func _ready():
@@ -10,6 +10,6 @@ func reset_enemies():
 		var enemy = enemies.get_child(i)
 		enemy.queue_free()
 		yield(get_tree().create_timer(0.1), "timeout");
-	var enemies = preload("res://objects/scene's/maps/testArea_enemies.tscn").instance()
+	var enemies = enemiesScene.instance()
 	$enemies.add_child(enemies);
 	pass
