@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://objects/ui/theme.res" type="Theme" id=1]
+[ext_resource path="res://objects/scene's/tutorial/tutorial.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 470.632 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="tutorial " type="Label"]
+margin_left = -224.0
+margin_top = -128.0
+margin_right = 232.0
+margin_bottom = -80.0
+theme = ExtResource( 1 )
+text = "use A D OR <- -> to move"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="touch" type="Area2D" parent="."]
+position = Vector2( -117.351, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="touch"]
+position = Vector2( 56, 7 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 2 )
+[connection signal="body_entered" from="touch" to="." method="_on_touch_body_entered"]
