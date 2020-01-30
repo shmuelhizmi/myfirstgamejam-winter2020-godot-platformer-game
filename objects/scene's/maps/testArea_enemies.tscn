@@ -10,7 +10,7 @@
 [node name="testArea_enemies" type="Node2D"]
 
 [node name="spike2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 232.256, 112.006 )
+position = Vector2( 232.256, 98.3031 )
 
 [node name="polar_bear" parent="." instance=ExtResource( 2 )]
 position = Vector2( -212.78, 73.9633 )
@@ -26,3 +26,4 @@ position = Vector2( 2531.95, -110.042 )
 
 [node name="fallingSpike2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1340.02, -269.973 )
+scale = Vector2( 0.5, 0.5 )
