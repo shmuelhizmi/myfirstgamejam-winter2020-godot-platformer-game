@@ -1,9 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/Penguin_action/Penguin_walk.wav" type="AudioStream" id=2]
+[ext_resource path="res://objects/particals/snow.res" type="Material" id=3]
 [ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=4]
-[ext_resource path="res://objects/scene's/ui/hud.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/ui/theme.res" type="Theme" id=5]
+[ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
+[ext_resource path="res://assets/icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/ability_2.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/ability_3.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/Landscape 1.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/ability_1.png" type="Texture" id=11]
+[ext_resource path="res://assets/fonts/Winter flakes.ttf" type="DynamicFontData" id=12]
 
 [sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
@@ -73,8 +81,58 @@ tracks/0/keys = {
 "values": [ 17, 16, 15, 14, 13, 12 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 30.0
+
+[sub_resource type="ShaderMaterial" id=7]
+
+[sub_resource type="Animation" id=8]
+length = 5.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Position2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6, 1.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1.98682e-07 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=10]
+size = 60
+font_data = ExtResource( 12 )
 
 [node name="player" type="Node2D" groups=[
 "hero",
@@ -119,7 +177,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 vframes = 3
 hframes = 12
-frame = 12
+frame = 6
 __meta__ = {
 "_edit_lock_": true
 }
@@ -135,7 +193,7 @@ anims/run_air = SubResource( 5 )
 position = Vector2( -1, 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -143,13 +201,163 @@ __meta__ = {
 [node name="Position2D" type="Position2D" parent="player_body"]
 position = Vector2( 32.722, -8.01104 )
 
-[node name="hud" parent="." instance=ExtResource( 5 )]
+[node name="hud" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="container" type="Control" parent="hud"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Top" type="Control" parent="hud/container"]
+pause_mode = 2
+anchor_right = 1.0
+margin_bottom = 50.0
+
+[node name="life" type="Label" parent="hud/container/Top"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -502.0
+margin_top = -15.0
+margin_right = -374.0
+margin_bottom = 1.0
+rect_scale = Vector2( 2.2, 2.44 )
+theme = ExtResource( 5 )
+text = "♥♥♥ "
+align = 1
+
+[node name="abilities" type="Control" parent="hud/container/Top"]
+pause_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -227.0
+margin_bottom = 40.0
+
+[node name="run" type="TextureRect" parent="hud/container/Top/abilities"]
+pause_mode = 2
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -39.1697
+margin_top = -14.8679
+margin_right = -7.16974
+margin_bottom = 17.1321
+texture = ExtResource( 11 )
+
+[node name="ice" type="TextureRect" parent="hud/container/Top/abilities"]
+pause_mode = 2
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -75.7729
+margin_top = -15.2453
+margin_right = -43.7729
+margin_bottom = 16.7547
+texture = ExtResource( 8 )
+
+[node name="bunny" type="TextureRect" parent="hud/container/Top/abilities"]
+pause_mode = 2
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -111.999
+margin_top = -15.2453
+margin_right = -79.9986
+margin_bottom = 16.7547
+texture = ExtResource( 9 )
+
+[node name="snow" type="Node2D" parent="hud"]
+pause_mode = 2
+show_behind_parent = true
+position = Vector2( -51.6943, 73.5997 )
+z_index = 1
+
+[node name="Particles2D" type="Particles2D" parent="hud/snow"]
+pause_mode = 2
+show_behind_parent = true
+position = Vector2( 788.488, 92.3468 )
+amount = 10
+lifetime = 5.0
+process_material = ExtResource( 3 )
+texture = ExtResource( 6 )
+
+[node name="Particles2D2" type="Particles2D" parent="hud/snow"]
+pause_mode = 2
+show_behind_parent = true
+position = Vector2( 302.565, 107.216 )
+amount = 14
+lifetime = 12.0
+explosiveness = 0.27
+process_material = ExtResource( 3 )
+texture = ExtResource( 6 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="hud"]
+pause_mode = 2
+
+[node name="background" type="Sprite" parent="hud/ParallaxBackground"]
+pause_mode = 2
+show_behind_parent = true
+material = SubResource( 7 )
+scale = Vector2( 0.516337, 0.405202 )
+z_index = -1
+texture = ExtResource( 10 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="hud"]
+pause_mode = 2
+anims/dead = SubResource( 8 )
+anims/fade_in = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="hud/AnimationPlayer"]
+pause_mode = 2
+modulate = Color( 0, 0, 0, 0 )
+position = Vector2( 550.272, 293.161 )
+scale = Vector2( 18.8762, 11.0965 )
+z_index = 1
+texture = ExtResource( 7 )
+
+[node name="Position2D" type="Position2D" parent="hud/AnimationPlayer"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 267.994, 291.12 )
+z_index = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="hud/AnimationPlayer/Position2D"]
+pause_mode = 2
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -34.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 10 )
+text = "im dead but how!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="attack" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
-[connection signal="finished" from="camera/audioStreamPlayer" to="." method="_on_audioStreamPlayer_finished"]
 [connection signal="timeout" from="camera/audioStreamPlayer/walkSoundTimer" to="." method="_on_walkSoundTimer_timeout"]
 [connection signal="area_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="player_body/CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="animation_finished" from="hud/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]

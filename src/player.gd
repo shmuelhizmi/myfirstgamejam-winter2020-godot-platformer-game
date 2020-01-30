@@ -68,6 +68,10 @@ enum Direction {L=-1, R=1}
 #warning-ignore:unused_argument
 
 func _ready():
+	
+	$player_body/Position2D.modulate = Color(0, 0, 0, 0)
+	$hud/AnimationPlayer.play("fade_in")
+	
 	drawLifes();
 	lastCheckpoint = body.position;
 	pass
@@ -246,8 +250,10 @@ func damage():
 	lifes=lifes-1;
 	drawLifes();
 	if lifes<=0:
-		get_tree().paused = true
 		play_sound(dead)
+		$hud/AnimationPlayer.play("dead")
+		print('go')
+		get_tree().paused = true
 		return true;
 	else:
 		get_parent().call("reset_enemies");
@@ -322,11 +328,14 @@ func play_sound(sound):
 func _on_walkSoundTimer_timeout():
 	audioStreamPlayer.play()
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == 'dead':
+		get_tree().reload_current_scene()
 
-func _on_audioStreamPlayer_finished():
-	if die == true:
-		get_tree().reload_current_scene();
 
 
 func _on_attack_timeout():
 	can_attack = true
+
+
+

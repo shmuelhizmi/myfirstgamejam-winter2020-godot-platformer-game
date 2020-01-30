@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://objects/ui/theme.res" type="Theme" id=1]
 [ext_resource path="res://assets/sprites/ability_1.png" type="Texture" id=2]
@@ -7,8 +7,60 @@
 [ext_resource path="res://objects/particals/snow.res" type="Material" id=5]
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
 [ext_resource path="res://assets/images/Landscape 1.png" type="Texture" id=7]
+[ext_resource path="res://assets/icon.png" type="Texture" id=8]
+[ext_resource path="res://assets/fonts/Winter flakes.ttf" type="DynamicFontData" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
+
+[sub_resource type="Animation" id=2]
+resource_name = "dead"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Position2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_in"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=4]
+size = 60
+font_data = ExtResource( 9 )
 
 [node name="hud" type="CanvasLayer"]
 
@@ -112,4 +164,38 @@ texture = ExtResource( 7 )
 centered = false
 __meta__ = {
 "_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+anims/dead = SubResource( 2 )
+anims/fade_in = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="AnimationPlayer"]
+pause_mode = 2
+modulate = Color( 0, 0, 0, 0 )
+position = Vector2( 550.272, 293.161 )
+scale = Vector2( 18.8762, 11.0965 )
+z_index = 1
+texture = ExtResource( 8 )
+
+[node name="Position2D" type="Position2D" parent="AnimationPlayer"]
+pause_mode = 2
+position = Vector2( 267.994, 291.12 )
+z_index = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="AnimationPlayer/Position2D"]
+pause_mode = 2
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -34.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 4 )
+text = "im dead but how!!"
+__meta__ = {
+"_edit_use_anchors_": false
 }

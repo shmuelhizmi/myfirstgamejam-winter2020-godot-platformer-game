@@ -111,7 +111,7 @@ position = Vector2( 0, 400 )
 shape = SubResource( 2 )
 
 [node name="win_point" parent="maps" instance=ExtResource( 5 )]
-position = Vector2( 3824, -112 )
+position = Vector2( 3808.61, -110.45 )
 scene = "res://objects/scene's/maps/level2/level2.tscn"
 
 [node name="collectable-speed-_time_10_time;" type="Area2D" parent="maps"]
