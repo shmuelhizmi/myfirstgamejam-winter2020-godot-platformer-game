@@ -25,22 +25,21 @@ func _physics_process(delta):
 	velocity.x = 0;
 	
 	if currentState == state.walk or gotPushed:
-		if !raycast2.is_colliding():
-			currentDirection = Direction.L;
-			pass
-		if raycast4.is_colliding() and raycast4.get_collider().name != "player_body":
+		if raycast4.is_colliding()  and raycast4.get_collider().get_class() !="KinematicBody2D":
 			currentDirection = Direction.L;
 			pass
 		pass
+		if raycast3.is_colliding()  and raycast3.get_collider().get_class() !="KinematicBody2D":
+			currentDirection = Direction.R;
 		if currentState == state.walk:
-			velocity.x = currentDirection * speed
-			velocity += slide()
+			if !raycast2.is_colliding():
+				currentDirection = Direction.L;
+				pass
 			if !raycast1.is_colliding():
 				currentDirection = Direction.R;
 				pass
-			if raycast3.is_colliding() and raycast3.get_collider().name != "player_body":
-				currentDirection = Direction.R;
-				pass
+			velocity.x = currentDirection * speed
+			velocity += slide()
 		else:
 			if gotPushed:
 				velocity.x += currentDirection* speed  *3;
@@ -64,19 +63,23 @@ func slide():
 	return Vector2();
 
 func _on_vulnerableArea_body_entered(body: PhysicsBody2D):
-	if body!=null and "player" in body.name.to_lower():
-		if currentState == state.walk:
-			body.get_parent().call("actionJump")
-			currentState = state.vulnerable;
-			scale= Vector2(0.5,0.5);
-			$sprite.texture = vulnerableSprite;
-		else:
-			if not gotPushed:
-				push(body);
+	if body!=null:
+		if "player" in body.name.to_lower():
+			if currentState == state.walk:
+				body.get_parent().call("actionJump")
+				currentState = state.vulnerable;
+				scale= Vector2(0.5,0.5);
+				$sprite.texture = vulnerableSprite;
 			else:
-				if dangers:
-					body.get_parent().call("damage")
-				pass
+				if not gotPushed:
+					push(body);
+				else:
+					if dangers:
+						body.get_parent().call("damage")
+					pass
+		else:
+			if gotPushed:
+				body.queue_free(); 
 
 func _on_vulnerableArea_area_entered(area):
 	if "DeadZone" in area.name:

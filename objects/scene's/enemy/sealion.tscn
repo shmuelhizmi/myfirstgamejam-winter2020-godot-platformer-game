@@ -29,6 +29,7 @@ texture = ExtResource( 2 )
 [node name="rayCast1" type="RayCast2D" parent="."]
 position = Vector2( -28.6789, 0 )
 enabled = true
+collide_with_areas = true
 
 [node name="rayCast2" type="RayCast2D" parent="."]
 position = Vector2( 29.0562, 0 )
