@@ -72,7 +72,7 @@ func _ready():
 	$player_body/Position2D.modulate = Color(0, 0, 0, 0)
 	$hud/AnimationPlayer.play("fade_in")
 	
-	drawLifes();
+#	drawLifes();
 	lastCheckpoint = body.position;
 	pass
 
@@ -248,7 +248,7 @@ func getCollectableTime(collectable):
 
 func damage():
 	lifes=lifes-1;
-	drawLifes();
+#	drawLifes();
 	if lifes<=0:
 		play_sound(dead)
 		$hud/AnimationPlayer.play("dead")
@@ -262,20 +262,20 @@ func damage():
 	pass
 
 
-func drawLifes():
-	var lifecount = 0;
-	lifelable.text="";
-	while lifecount < maximum_lifes:
-		lifecount+=1;
-		if lifecount>lifes:
-			lifelable.text+="x";
-			pass
-		else:
-			lifelable.text+="♥ ";
-			pass
-		pass
-		
-	pass
+#func drawLifes():
+#	var lifecount = 0;
+#	lifelable.text="";
+#	while lifecount < maximum_lifes:
+#		lifecount+=1;
+#		if lifecount>lifes:
+#			lifelable.text+="x";
+#			pass
+#		else:
+#			lifelable.text+="♥ ";
+#			pass
+#		pass
+#		
+#	pass
 
 
 #abilities

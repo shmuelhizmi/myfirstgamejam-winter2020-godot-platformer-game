@@ -1,10 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/Penguin_action/Penguin_walk.wav" type="AudioStream" id=2]
 [ext_resource path="res://objects/particals/snow.res" type="Material" id=3]
 [ext_resource path="res://assets/sprites/Penguin/WizardPenguin-Sprite.png" type="Texture" id=4]
-[ext_resource path="res://objects/ui/theme.res" type="Theme" id=5]
+[ext_resource path="res://objects/scene's/player/life.gd" type="Script" id=5]
 [ext_resource path="res://assets/sprites/decoration/ice.png" type="Texture" id=6]
 [ext_resource path="res://assets/icon.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/ability_2.png" type="Texture" id=8]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/images/Landscape 1.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/ability_1.png" type="Texture" id=11]
 [ext_resource path="res://assets/fonts/Winter flakes.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://assets/sprites/Heart.png" type="Texture" id=13]
 
 [sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
@@ -216,21 +217,39 @@ __meta__ = {
 pause_mode = 2
 anchor_right = 1.0
 margin_bottom = 50.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
-[node name="life" type="Label" parent="hud/container/Top"]
+[node name="life" type="Control" parent="hud/container/Top"]
 pause_mode = 2
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -502.0
-margin_top = -15.0
-margin_right = -374.0
-margin_bottom = 1.0
-rect_scale = Vector2( 2.2, 2.44 )
-theme = ExtResource( 5 )
-text = "♥♥♥ "
-align = 1
+margin_left = 98.0493
+margin_top = 32.0
+margin_right = 138.049
+margin_bottom = 72.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="hud/container/Top/life"]
+pause_mode = 2
+scale = Vector2( 5, 5 )
+texture = ExtResource( 13 )
+
+[node name="2" type="Sprite" parent="hud/container/Top/life"]
+pause_mode = 2
+position = Vector2( 53.7625, 0 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 13 )
+
+[node name="3" type="Sprite" parent="hud/container/Top/life"]
+pause_mode = 2
+position = Vector2( 108.188, 0 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 13 )
 
 [node name="abilities" type="Control" parent="hud/container/Top"]
 pause_mode = 2
@@ -330,6 +349,9 @@ position = Vector2( 550.272, 293.161 )
 scale = Vector2( 18.8762, 11.0965 )
 z_index = 1
 texture = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Position2D" type="Position2D" parent="hud/AnimationPlayer"]
 pause_mode = 2
