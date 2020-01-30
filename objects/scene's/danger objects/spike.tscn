@@ -1,28 +1,29 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/spike.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/danger_objects/Spike_Up.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/danger_objects/Ice-spikes-large.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.04621, 8.90764 )
+extents = Vector2( 128.087, 18.5101 )
 
 [node name="spike" type="KinematicBody2D"]
 position = Vector2( 0.157227, 0 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+[node name="touch_to_die" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="touch_to_die"]
+polygon = PoolVector2Array( -125.882, 7.93911, -119.056, -9.69367, -60.1855, -11.9689, -54.4975, -19.3633, -26.9107, -18.5101, -26.9107, -24.1981, -18.6632, -26.7577, 8.35482, -27.3265, 8.35482, -43.5372, 15.7492, -45.8124, 18.8776, -36.996, 45.0424, -1.16168, 53.8588, -31.3081, 83.7207, -32.4456, 108.464, -4.00568, 115.289, -14.5285, 119.84, -13.6753, 125.812, 7.37031 )
+one_way_collision = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="touch_to_die" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="touch_to_die"]
-polygon = PoolVector2Array( -1.97143, -9.07256, -1.9037, -9.98693, -0.992964, -11.9595, 0.995178, -11.9864, 1.95697, -10.0208, 1.9231, -9.07256 )
-one_way_collision = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 27.018 )
+shape = SubResource( 1 )
 [connection signal="body_entered" from="touch_to_die" to="." method="_on_toch_to_die_body_entered"]

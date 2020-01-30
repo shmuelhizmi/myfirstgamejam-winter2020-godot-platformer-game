@@ -4,14 +4,11 @@
 [ext_resource path="res://src/fallingSpike.gd" type="Script" id=2]
 
 [sub_resource type="RayShape2D" id=1]
-length = 69.136
+length = 432.796
 
 [node name="fallingSpike" instance=ExtResource( 1 )]
 rotation = -3.14159
 script = ExtResource( 2 )
-
-[node name="touch_to_die" parent="." index="2"]
-editor/display_folded = true
 
 [node name="playerDetector" type="Area2D" parent="." index="3"]
 rotation = 3.14159

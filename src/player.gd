@@ -100,7 +100,6 @@ func updateAnimation():
 	else:
 		if animationPlayer.current_animation!="idle":
 			audioStreamPlayer.get_node("walkSoundTimer").stop()
-			sprite.flip_h = not sprite.flip_h;
 			animationPlayer.current_animation="idle"
 	pass
 

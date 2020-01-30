@@ -5,14 +5,8 @@
 
 [node name="enemies" type="Node2D"]
 
-[node name="spike" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1670, 140 )
-
-[node name="spike2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1700, 140 )
-
 [node name="spike3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1730, 140 )
+position = Vector2( 1730, 127.395 )
 
 [node name="sealion" parent="." instance=ExtResource( 1 )]
 position = Vector2( 3860, 140 )
