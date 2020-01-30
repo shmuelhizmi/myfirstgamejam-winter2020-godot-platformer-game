@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://objects/scene's/enemy/sealion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/scene's/danger objects/spike.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/scene's/enemy/redPenguin.tscn" type="PackedScene" id=3]
 
 [node name="enemies" type="Node2D"]
 
 [node name="spike3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1730, 127.395 )
+position = Vector2( 1690, 70 )
 
 [node name="sealion" parent="." instance=ExtResource( 1 )]
-position = Vector2( 3860, 140 )
+position = Vector2( 3710, 80 )
+
+[node name="redPenguin" parent="." instance=ExtResource( 3 )]
+position = Vector2( 6020, 40 )

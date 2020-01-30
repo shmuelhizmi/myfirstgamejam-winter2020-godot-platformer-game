@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/ability_3.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 20.0
+
+[node name="collectable-bunny-_time_10_time;" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )

@@ -262,21 +262,6 @@ func damage():
 	pass
 
 
-#func drawLifes():
-#	var lifecount = 0;
-#	lifelable.text="";
-#	while lifecount < maximum_lifes:
-#		lifecount+=1;
-#		if lifecount>lifes:
-#			lifelable.text+="x";
-#			pass
-#		else:
-#			lifelable.text+="♥ ";
-#			pass
-#		pass
-#		
-#	pass
-
 
 #abilities
 func start_ability_speed():

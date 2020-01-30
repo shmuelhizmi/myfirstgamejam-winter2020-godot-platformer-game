@@ -30,8 +30,8 @@ color = Color( 0.0862745, 0.662745, 0.721569, 1 )
 hue_variation = -1.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 15.0
-height = 26.0
+radius = 14.1
+height = 32.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "run_air"
@@ -194,6 +194,7 @@ anims/run_air = SubResource( 5 )
 position = Vector2( -1, 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/CollisionDetector"]
+visible = false
 shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
